@@ -2,25 +2,25 @@ CREATE TABLE "products" (
   "id" SERIAL PRIMARY KEY,
   "category_id" int,
   "user_id" int,
-  "name" text,
-  "description" text,
+  "name" text NOT NULL,
+  "description" text NOT NULL,
   "old_price" int,
-  "price" int,
-  "quantity" int,
-  "status" int,
+  "price" int NOT NULL,
+  "quantity" int DEFAULT 0,
+  "status" int DEFAULT 1,
   "created_at" timestamp DEFAULT (now()),
   "updated_at" timestamp DEFAULT (now())
 );
 
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,
-  "name" text
+  "name" text NOT NULL
 );
 
 CREATE TABLE "files" (
   "id" SERIAL PRIMARY KEY,
   "name" text,
-  "path" text,
+  "path" text NOT NULL,
   "product_id" int
 );
 
