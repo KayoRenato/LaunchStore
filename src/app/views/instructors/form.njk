@@ -1,0 +1,76 @@
+
+    <div class="item">
+      <div>Avatar</div>
+      <input 
+        type="url"
+        name="avatar_url"
+        placeholder="https://"
+        value="{{instructor.avatar_url}}"
+        required="required"
+        oninvalid= "this.setCustomValidity('Insira o endereço do seu Avatar!')"
+        onchange="this.setCustomValidity('')"
+      >
+    </div>
+    <div class="item">
+      <div>Instrutor</div>
+      <input 
+        type="text"
+        name="name"
+        placeholder="Nome Completo"
+        value="{{instructor.name}}"
+        required="required"
+        oninvalid="this.setCustomValidity('Preencha seu nome!')"
+        onchange="this.setCustomValidity('')"
+      >
+    </div>
+    <div class="item">
+      <div>Data de Nascimento</div>
+      <input 
+        type="date" 
+        name="birth"
+        min="1900-01-01"
+        max="2020-01-01"
+        value="{{instructor.birth}}"
+        required="required"
+        oninvalid="this.setCustomValidity('Preencha sua Data de Nascimento!')"
+        onchange="this.setCustomValidity('')"
+      >
+    </div>
+    <div class="item">
+      <div>Sexo</div>
+      <div class="sexContainer">
+        <span>
+          <input 
+            type="radio" 
+            name="gender" 
+            value="M" 
+            {% if instructor.gender =='M' %}
+              checked
+            {% endif %}
+          >Masculino
+        </span>
+
+        <span>
+          <input 
+            type="radio" 
+            name="gender" 
+            value="F"
+            {% if instructor.gender =='F' %}
+                checked
+            {% endif %}
+          >Feminino
+        </span>
+      </div>
+    </div>
+    <div class="item">
+      <div>Área de Atuação</div>
+      <input 
+        type="text" 
+        name="services"
+        placeholder="Separe as áreas por vírgula"
+        value="{{instructor.services}}"
+        required="required"
+        oninvalid="this.setCustomValidity('Insira pelo menos uma Área de Atuação!')"
+        onchange="this.setCustomValidity('')"
+      >
+    </div>
