@@ -1,24 +1,30 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700|Odibee+Sans&display=swap');
 
 *{
   margin: 0;
   padding: 0;
   font-size: 14px;
-  font-family: 'Montserrat', sans-serif;
-  color: black;
+  /* font-family: 'Odibee Sans', cursive; */
+  font-family: 'Montserrat', sans-serif;  
+  text-decoration: none;
+  list-style-type: none;
+  box-sizing: border-box;
+  border: none;
 }
 
 :root{
-  /* --color-first;
-  --color-second: ;
-  --color-third;
-  --color-fourth:;
-  --color-fifth; */
+  --color-first: #FC8600;
+  --color-second: #040404;
+  --color-second-contrast: #ffffff;
+  --color-third: #f9f9f9;
+  --color-fourth: #2176FF;
+  --color-fifth:  rgb(221, 78, 71);
 
 }
 
-a {
- text-decoration: none;
+
+html, body{
+  min-height: 100vh;
 }
 
 a:hover {
@@ -27,6 +33,191 @@ a:hover {
 
 
 body{
-  /* background-color:; */
+  background-color: var(--color-third);
+
+}
+
+.container{
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1080px;
+}
+
+header, footer {
+  width: 100%;
+  padding: 32px 0;
+  background-color: var(--color-second);
+  color: white;
+  text-align: center;
+}
+
+
+header div.container{
+  display: grid;
+  grid-template-columns: 250px 1fr 300px;
+  column-gap: 80px;
+  align-items: center;
+}
+
+header div.container a{
+  justify-self: center;
+}
+
+
+/* === LOGO === */
+
+header .logo h1{
+  font-family: 'Odibee Sans', cursive;
+  color:var(--color-first);
+  font-size: 46px;
+  line-height: 46px;
+  letter-spacing: 2px;
+
+}
+
+header .logo h2 {
+  color: var(--color-second-contrast);
+  line-height: 16px;
+  letter-spacing: 2px;
+}
+
+.button{
+  width: 100%;
+  background-color: var(--color-first);
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: block;
+  margin: 16px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  /* alinhar o button na posição mais baixa  */
+  align-self: end;
+}
+
+.button:hover{
+  background-color: rgb(204, 110, 2););
+}
+
+/* === HEADER SEARCH === */
+
+.search input {
+  width: 100%;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+/* === MENU === */
+
+nav.primary ul{
+  /* fazer os elementos da lista ficarem na mesma linha */
+  display: flex;
+  /* aplicar espaço dinamico entre os elementos */
+  justify-content: space-between;
+  margin: 0 32px;
+
+}
+
+nav.primary ul li a{
+  /* forçar o icone ficar ao lado do texto */
+  display: flex;
+  /* alinha o icone e texto na mesma altura Y */
+  align-items: center;
+  /* inverter o alinhamento do display flex para coluna */
+  flex-direction: column;
+  color: var(--color-second-contrast);
+
+}
+
+nav.primary ul li a:hover{
+  color: var(--color-first);
+  transition: 300ms ease-in-out;
+}
+
+nav.primary i{
+  font-size: 22px;
+  line-height: 32px;
+}
+
+/* === PRODUCT FORM === */
+
+section.form {
+  background-color: white;
+
+  padding: 32px 24px;
+  margin: 32px auto;
+
+  box-shadow: 2px 2px 10px -8px rgba(60,60,60,.5);
+  border: 1px solid #efefef;
+  border-radius: 4px;
+
+  max-width: 700px;
+  width: 90%;
+
+}
+
+section.form .header h3{
+  font-size: 24px;
+  line-height: 24px;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Odibee Sans', cursive;
+
+  text-shadow: 1px 1px 1px var(--color-first);
+}
+
+form .item{
+  margin-bottom: 16px;
+}
+
+form .item > div:nth-child(1){
+  color: #777;
+  text-transform: uppercase;
+  font-weight: bold;
+
+  margin-bottom: 8px;
+}
+
+form .item input[type="text"],
+form .item input[type="number"],
+form .item textarea,
+form .item select{
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 16px;
+
+  box-shadow: 2px 2px 10px -8px rgba(60,60,60,.5);
+  border: 1px solid #efefef;
+  border-radius: 4px;
+
+}
+
+form .item select {
+
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+  background-color: var(--color-second-contrast);
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23FC8600%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'),
+  linear-gradient(to bottom, #ffffff 0%,#e5e5e5 100%);
+  background-repeat: no-repeat;
+  background-position: right 0.7em top 50%, 0 0;
+  background-size: .65em auto, 100%;
+
+}
+
+form .item textarea{
+  min-height: 150px;
+}
+
+form .fields {
+  margin-bottom: 66px;
 }
 
