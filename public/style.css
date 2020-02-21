@@ -100,7 +100,23 @@ header .logo h2 {
 }
 
 .button:hover{
-  background-color: rgb(204, 110, 2););
+  background-color: rgb(204, 110, 2);
+}
+
+.button.update{
+  background-color: var(--color-fourth);
+}
+
+.button.update:hover{
+  background-color: rgb(8, 88, 218);
+}
+
+.button.delete{
+  background-color:rgba(177, 175, 175, 0.781)
+}
+
+.button.delete:hover{
+  background-color: var(--color-fifth);
 }
 
 /* === HEADER SEARCH === */
@@ -216,8 +232,36 @@ form .item select {
 form .item textarea{
   min-height: 150px;
 }
+/* test */
+
+form .item label{
+  padding: 8px 16px;
+}
+
+form .item label:hover,
+form .item input[type="radio"]:hover{
+  cursor: pointer;
+}
+
+form .item input[type="radio"]:checked{
+  background-color: aqua;
+}
+
+/* ---- */
+form .item span{
+  background-color: var(--color-fourth);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  display: inline-block;
+  margin-top: 8px;
+  /* margin-right: 8px; */
+  border-radius: 16px;
+
+}
 
 form .fields {
   margin-bottom: 66px;
 }
-

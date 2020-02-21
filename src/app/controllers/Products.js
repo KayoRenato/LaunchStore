@@ -1,3 +1,5 @@
+const { formatPrice } = require('../lib/utils')
+
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 
@@ -27,8 +29,56 @@ module.exports = {
     const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
     const categoriesRes = categoriesDB.rows
 
-    return res.render('products/create', {product: productResID, categories: categoriesRes}) // renderiza página create com as informações salvas no DB
+    return res.redirect(`products/${productResID}/edit`) // redireciona para página edit
 
+  },
+  async edit(req,res) {
+     
+    let results = Product.find(req.params.id) //retorna um array de rows com o ID informado no req.params
+    const product = (await results).rows[0]
+
+    if(!product) return res.send("Product not found!")
+
+    // product.old_price = formatPrice(product.old_price)
+    product.price = formatPrice(product.price)
+  
+    const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
+    const categories = categoriesDB.rows
+
+    return res.render('products/edit', {product, categories})
+
+  },
+  async update(req,res){
+    let { id, price, old_price } = req.body
+
+    const keys = Object.keys(req.body)
+
+    for(let key of keys){
+      if(req.body[key]==""){
+        return res.send(`Please, fill ${key} field!`)
+      }
+    }
+    
+    price = price.replace(/\D/g, "")
+
+    if(old_price != price){
+      const oldProduct = await Product.find(id)
+      old_price = oldProduct.rows[0].price
+    }
+
+    const newProduct = {...req.body, price, old_price}
+
+    await Product.saveUpdate(newProduct) //retorna um array de rows com o ID do produto salvo
+
+    return res.redirect(`products/${id}/edit`) // redireciona para página edit
+  },
+  async delete(req,res){
+    const { id } = req.body
+
+    await Product.delete(id)
+
+    return res.redirect('/products/create')
   }
 
 }
+

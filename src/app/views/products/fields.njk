@@ -3,9 +3,9 @@
   <div>
      <select name="category_id">
       {% for category in categories %}
-        <option value="{{category.id}}" 
+        <option value="{{category.id}}"
           {% if product.category_id == category.id %} 
-            select
+            selected
           {% endif %}
         >
           {{category.name}}
@@ -22,7 +22,7 @@
         type="text"
         name="name"
         placeholder="Digite o Título do Anúcio"
-        value={{product.name}}
+        value="{{product.name}}"
       >
   </div>
 </div>
@@ -61,12 +61,12 @@
         min=0
         name="quantity"
         placeholder="Estoque Disponível"
-        value={{product.name}}
+        value={{product.quantity}}
       >
   </div>
 </div>
 
-{% if product.status %}
+{% if (product.status == 1) or (product.status == 0) %}
 
   <div class="item">
     <div> Diponível </div>
@@ -74,22 +74,26 @@
         <span>
           <input 
             type="radio" 
+            id="radio1"
             name="status"
-            value ="1"
-            {% if products.status == 1 %}
+            value = 1
+            {% if product.status == 1 %}
               checked
             {% endif %}
-          > Sim
+          >
+          <label for="radio1">Sim</label>
         </span>
         <span>
           <input 
             type="radio" 
+            id="radio0"
             name="status"
-            value ="0" 
-            {% if products.status == 0 %}
+            value = 0 
+            {% if product.status == 0 %}
               checked
             {% endif %}
-          > Não
+          > 
+          <label for="radio0">Não</label>
         </span>
     </div>
   </div>
