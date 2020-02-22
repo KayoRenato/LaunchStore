@@ -265,3 +265,93 @@ form .item span{
 form .fields {
   margin-bottom: 66px;
 }
+
+/* === PHOTOS UPLOAD === */
+
+form .item #photos-upload{
+  position: relative;
+
+  display: block;
+  overflow: hidden;
+
+  width: 200px;
+}
+
+form .item #photos-upload p{
+  padding: 8px 16px;
+  width: 100%;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px -6px #333;
+  background-color: var(--color-fourth);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  transition: all 0.2s;
+
+}
+
+
+form .item #photos-input{
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: block;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+}
+
+
+form .item #photos-preview{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+  margin: 8px 0;
+}
+
+
+form .item #photos-preview img{
+  /* A imagem vai ocupar todo o espaço da largura e tera um limite de 150px de altura, para não esticar, o object-fit: cover irá cortar a altura da image quem passar dos 150px */
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+#photos-preview .photo{
+  position: relative;
+}
+
+#photos-preview .photo i{
+  position:absolute;
+  top: 0;
+  left: 0;
+
+  background-color: rgba(255, 255, 255, 0.6);
+  font-size: 400%;
+  color: rgba(255, 0, 0, 0.5);
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  /* só funciona  com display: flex*/
+  /* alinha o elemento no eixo Y */
+  align-items: center; 
+  /* alinha o elemento no eixo X */
+  justify-content: center;
+
+  cursor: pointer;
+  opacity: 0;
+  transition: 400ms;
+}
+
+#photos-preview .photo:hover i{
+  opacity: 1;
+}
