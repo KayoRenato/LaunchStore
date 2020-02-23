@@ -35,6 +35,30 @@ module.exports = {
     return res.redirect(`products/${productResID}/edit`) // redireciona para página edit
 
   },
+  async show(req, res){
+    let results = Product.find(req.params.id) //retorna um array de rows com o ID informado no req.params
+    const product = (await results).rows[0]
+
+    if(!product) return res.send("Product not found!")
+
+    // product.old_price = formatPrice(product.old_price)
+    product.price = formatPrice(product.price)
+  
+    const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
+    const categories = categoriesDB.rows
+
+    // Pq não criou a método files dentro do Model Files???? Já que a busca vai ser dentro do tabela files?
+    const imageDB = await Product.files(product.id)
+    let files = imageDB.rows
+    files = files.map(file => ({
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+    }))
+
+    
+    return res.render('products/show')
+
+  },
   async edit(req,res) {
      
     let results = Product.find(req.params.id) //retorna um array de rows com o ID informado no req.params

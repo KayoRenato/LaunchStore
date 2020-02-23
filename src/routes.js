@@ -9,6 +9,7 @@ routes.get('/', (req,res) => {
 })
 
 routes.get('/products/create', ProductController.create)
+routes.get('/products/:id', ProductController.show)
 routes.get('/products/:id/edit', ProductController.edit)
 
 // O middleware multer vai verificar o input de name = photo dos forms e irá salvar os arquivos no backend conforme os parametros configurados e além da req.body a rota apresentará tb o req.files
