@@ -34,6 +34,8 @@ a:hover {
 
 body{
   background-color: var(--color-third);
+  display: flex;
+  flex-direction: column;
 
 }
 
@@ -49,6 +51,11 @@ header, footer {
   background-color: var(--color-second);
   color: white;
   text-align: center;
+}
+
+footer{
+  /* junto com o display flex do body faz o footer ficar sempre na base da página */
+  margin-top: auto;
 }
 
 
@@ -412,4 +419,30 @@ justify-content: space-between;
 padding-top: 8px;
 border-top: 1px solid #e5e5e5;
 
+}
+
+.price_buy .price{
+  display: flex;
+  align-items: initial;
+}
+
+.price_buy .price h3{
+font-size: 24px;
+color: #333;
+}
+
+.price_buy .price span{
+  font-style: italic;
+  text-decoration: line-through;
+  color: #777;
+  margin-left: 8px;
+}
+
+.price_buy .buy .button{
+  background-color: var(--color-fourth);
+  transition: all 400ms;
+}
+
+.price_buy .buy .button:hover{
+  background-color: rgb(8, 88, 218);
 }
