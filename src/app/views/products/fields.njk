@@ -48,7 +48,20 @@
       >
       <p>Selecione até 6 fotos</p>
     </div>
-    <div id="photos-preview"></div>
+    <div id="photos-preview">
+      {% if files %}
+        {% for img in files %}
+          <div class="photo" id="{{img.id}}">
+            <img src="{{img.src}}" alt="{{img.name}}">
+            <i 
+              class="fas fa-trash-alt"
+              onclick="PhotosUpload.removeImgAfterDB(event)"
+            ></i>
+          </div>          
+        {% endfor %}
+        <input type="hidden" name="removed_files">
+      {% endif %}
+    </div>
   </div>
 </div>
 

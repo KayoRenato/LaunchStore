@@ -85,7 +85,7 @@ const PhotosUpload = {
     const container = document.createElement('div')
 
     container.classList.add('photo')
-    container.onclick = PhotosUpload.removeImg
+    container.onclick = PhotosUpload.removeImgBeforeDB
 
     container.appendChild(image)
     container.appendChild(PhotosUpload.createIconRemove())
@@ -98,7 +98,7 @@ const PhotosUpload = {
     icon.classList.add('fas', 'fa-trash-alt')
     return icon
   },
-  removeImg(event){
+  removeImgBeforeDB(event){
     const photoDiv = event.target.parentNode //selecionar o elemento PAI do elemento DOM
     const photosArray = Array.from(PhotosUpload.preview.children)
     const index = photosArray.indexOf(photoDiv)
@@ -106,6 +106,19 @@ const PhotosUpload = {
     // removendo file do files criado na posição do index
     PhotosUpload.files.splice(index, 1)
     PhotosUpload.input.files = PhotosUpload.getAllFiles()
+    photoDiv.remove();
+  },
+  removeImgAfterDB(event){
+    const photoDiv = event.target.parentNode //selecionar o elemento PAI do elemento DOM
+
+    if(photoDiv.id){
+      const removedFiles = document.querySelector('input[name="removed_files"]')
+      if(removedFiles){
+        removedFiles.value += `${photoDiv.id},`
+      }
+    }
+
+
     photoDiv.remove();
   }
 }

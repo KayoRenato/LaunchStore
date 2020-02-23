@@ -2,6 +2,7 @@ const { formatPrice } = require('../lib/utils')
 
 const Category = require('../models/Category')
 const Product = require('../models/Product')
+const Files = require('../models/Files')
 
 module.exports = {
   create(req, res) {
@@ -23,11 +24,13 @@ module.exports = {
       }
     }
 
+    if(req.files.length == 0) return res.send('Please, send at least one image!')
+
     const saveDB = await Product.saveCreate(req.body) //retorna um array de rows com o ID do produto salvo
     const productResID = saveDB.rows[0].id
 
-    const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
-    const categoriesRes = categoriesDB.rows
+    const filesPromise = req.files.map(file => Files.saveFiles({...file, product_id: productResID}))
+    await Promise.all(filesPromise)
 
     return res.redirect(`products/${productResID}/edit`) // redireciona para página edit
 
@@ -45,7 +48,15 @@ module.exports = {
     const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
     const categories = categoriesDB.rows
 
-    return res.render('products/edit', {product, categories})
+    // Pq não criou a método files dentro do Model Files???? Já que a busca vai ser dentro do tabela files?
+    const imageDB = await Product.files(product.id)
+    let files = imageDB.rows
+    files = files.map(file => ({
+      ...file,
+      src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
+    }))
+
+    return res.render('products/edit', {product, categories, files})
 
   },
   async update(req,res){
@@ -54,9 +65,24 @@ module.exports = {
     const keys = Object.keys(req.body)
 
     for(let key of keys){
-      if(req.body[key]==""){
+      // req.body[key] - informar o valor da tag input da respectiva key(name)
+      if(req.body[key]=="" && key != 'removed_files'){
         return res.send(`Please, fill ${key} field!`)
       }
+    }
+
+    if(req.files.length != 0) {
+      const filesPromise = req.files.map(file => Files.saveFiles({...file, product_id: id}))
+      await Promise.all(filesPromise) 
+    }
+
+    if(req.body.removed_files){
+      let removedFiles = req.body.removed_files.split(",")
+      const lastIndex = removedFiles.length -1
+      removedFiles.splice(lastIndex,1)
+
+      const removedFilesPromise = removedFiles.map(id => Files.deleteFile(id))
+      await Promise.all(removedFilesPromise)
     }
     
     price = price.replace(/\D/g, "")
