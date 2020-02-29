@@ -1,4 +1,4 @@
-const { formatPrice } = require('../lib/utils')
+const { formatPrice, date } = require('../lib/utils')
 
 const Category = require('../models/Category')
 const Product = require('../models/Product')
@@ -32,7 +32,7 @@ module.exports = {
     const filesPromise = req.files.map(file => Files.saveFiles({...file, product_id: productResID}))
     await Promise.all(filesPromise)
 
-    return res.redirect(`products/${productResID}/edit`) // redireciona para página edit
+    return res.redirect(`products/${productResID}`) // redireciona para página edit
 
   },
   async show(req, res){
@@ -41,22 +41,28 @@ module.exports = {
 
     if(!product) return res.send("Product not found!")
 
-    // product.old_price = formatPrice(product.old_price)
-    product.price = formatPrice(product.price)
-  
-    const categoriesDB = await Category.all() //retorna um array de rows com todas as categories do DB
-    const categories = categoriesDB.rows
+    const { day, hour, minutes, month, monthExt } = date(product.updated_at)
 
-    // Pq não criou a método files dentro do Model Files???? Já que a busca vai ser dentro do tabela files?
+    product.published = {
+      day: `${day} de ${monthExt}`,
+      hour: `${hour}h${minutes}`
+    }
+
+    if(product.price < product.old_price){
+      product.oldPrice = formatPrice(product.old_price)
+    }
+
+    product.old_price = formatPrice(product.old_price)
+    product.price = formatPrice(product.price)
+
     const imageDB = await Product.files(product.id)
-    let files = imageDB.rows
-    files = files.map(file => ({
+    const files = imageDB.rows.map(file => ({
       ...file,
       src: `${req.protocol}://${req.headers.host}${file.path.replace("public","")}`
     }))
 
-    
-    return res.render('products/show')
+  
+    return res.render('products/show', { product, files })
 
   },
   async edit(req,res) {
@@ -120,7 +126,7 @@ module.exports = {
 
     await Product.saveUpdate(newProduct) //retorna um array de rows com o ID do produto salvo
 
-    return res.redirect(`products/${id}/edit`) // redireciona para página edit
+    return res.redirect(`products/${id}`) // redireciona para página edit
   },
   async delete(req,res){
     const { id } = req.body

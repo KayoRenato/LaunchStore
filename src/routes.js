@@ -18,11 +18,9 @@ routes.put('/products', multer.array('photos', 6), ProductController.update)
 
 routes.delete('/products', ProductController.delete)
 
-
 // Alias
 routes.get('/ads/create', (req,res) => {
   res.redirect('/products/create')
 })
-
 
 module.exports = routes
