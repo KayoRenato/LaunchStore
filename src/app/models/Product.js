@@ -67,6 +67,15 @@ module.exports ={
   },
   files(id){
     return db.query(`SELECT * FROM files WHERE product_id = $1 `, [id])
+  },
+  all(){
+    return db.query(
+      `
+      SELECT * FROM products
+      WHERE status = '1'
+      AND quantity > '0'
+      ORDER BY updated_at DESC
+      `)
   }
 
 }

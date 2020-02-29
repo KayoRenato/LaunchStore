@@ -549,3 +549,65 @@ color: #333;
 .price_buy .buy .button:hover{
   background-color: rgb(8, 88, 218);
 }
+
+/* === SHOP === */
+
+.shop h2{
+  margin: 48px 0 32px;
+
+  font-size: 32px;
+  line-height: 42px;
+  letter-spacing: .7px;
+  text-transform: uppercase;
+  /* text-align: center; */
+  font-family: 'Odibee Sans', cursive;
+
+  text-shadow: 1px 1px 1px var(--color-first);
+
+}
+
+.shop .items{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  /* align-items: end; */
+}
+
+.shop .product{
+  display: grid;
+}
+
+.shop .product .image{
+  /* perfect 16:9 ratio - (9 / 16 = 0.5625) */
+  padding-top: 56.25%;
+
+  /* só é possível realizar essas configurações abaixo deixo o background-image atribuído no html(njk) home>index */
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.shop .items h4{
+  margin: 8px 0;
+  color: #999;
+
+}
+
+.shop .items .price{
+  margin-top: 12px;
+  display: flex;
+}
+.shop .items p{
+  font-weight: 300;
+  font-size: 24px;
+  color: #101010;
+
+}
+
+.shop .items .old-price p{
+  font-style: italic;
+  font-size: 18px;
+  text-decoration: line-through;
+  margin-left: 8px;
+  color: lightcoral;
+}

@@ -117,9 +117,11 @@ module.exports = {
     
     price = price.replace(/\D/g, "")
 
-    if(old_price != price){
-      const oldProduct = await Product.find(id)
-      old_price = oldProduct.rows[0].price
+    let lastPrice = await Product.find(id)
+    lastPrice = lastPrice.rows[0].price
+
+    if(lastPrice != price){
+      old_price = lastPrice
     }
 
     const newProduct = {...req.body, price, old_price}
