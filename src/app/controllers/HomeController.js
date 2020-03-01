@@ -37,5 +37,4 @@ module.exports = {
       console.error(err)
     }
   }
-
 }
