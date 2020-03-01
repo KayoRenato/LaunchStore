@@ -1,4 +1,4 @@
-const { formatPrice, date } = require('../lib/utils')
+const { formatPrice, date, getImage } = require('../lib/utils')
 
 const Category = require('../models/Category')
 const Product = require('../models/Product')

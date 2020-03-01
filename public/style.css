@@ -611,3 +611,41 @@ color: #333;
   margin-left: 8px;
   color: lightcoral;
 }
+
+/* === BODY SEARCH === */
+
+.search-products.container{
+  display: grid;
+  grid-template-columns: 300px 1fr;
+}
+
+
+.search-products.container aside{
+  margin: 48px 0 32px;
+
+}
+
+.search-products aside h2{
+  font-size: 24px;
+  text-transform: uppercase;
+}
+.search-products aside p{
+  margin-top: 8px;
+
+}
+.search-products .categories{
+  margin-top: 32px;
+
+}
+
+.search-products .categories h4{
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.search-products .categories ul{
+  margin-top: 8px;
+
+}
+
+
