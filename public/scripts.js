@@ -11,6 +11,106 @@ const Mask = {
       style: 'currency',
       currency: 'BRL'
     }).format(value/100)
+  },
+  cpfCnpj(value){
+    value = value.replace(/\D/g,"")
+
+    if (value.length > 14)
+      value = value.slice(0, -1)
+
+    if(value.length > 11){
+      //cnpj - 99.999.999/9999-99 (14)
+      value = value.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/,"$1.$2.$3/$4-$5") 
+
+    }else{
+      //cpf - 999.999.999-99 (11)
+      value = value.replace(/(\d{3})(\d{3})(\d{3})(\d)/,"$1.$2.$3-$4")
+
+    }
+    return value
+
+  },
+  cep(value){
+    value = value.replace(/\D/g,"")
+  
+    if (value.length > 8)
+      value = value.slice(0, -1)
+
+    //cep - 99999-999 (8)
+    value = value.replace(/(\d{5})(\d)/,"$1-$2") //99999-999
+
+    return value
+    
+  }
+}
+
+const Validate = {
+  apply(input, func) {
+    Validate.clearErrors(input)
+
+    let results = Validate[func](input.value)
+    input.value = results.value
+
+    if(results.error)
+      Validate.displayError(input, results.error)
+
+  },
+  displayError(input, error){
+    const div = document.createElement('div')
+    div.classList.add('error')
+    div.innerHTML = error
+    input.parentNode.appendChild(div)
+    input.focus()
+  },
+  clearErrors(input){
+    const errorDiv = input.parentNode.querySelector('.error')
+    if(errorDiv)
+      errorDiv.remove()
+  },
+  isEmail(value){
+    let error = null
+
+    const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ 
+
+    if(!value.match(mailFormat))
+      error = "E-mail Inválido!"
+    
+    return {
+      error,
+      value
+    }
+  },
+  isCpfCnpj(value){
+    let error = null
+
+    const cleanValues = value.replace(/\D/g, "")
+
+    if(cleanValues.length > 0){
+      if(cleanValues.length > 11 && cleanValues.length !== 14){
+        error = "CNPJ Incorreto!"
+      } 
+      else if( cleanValues.length < 12 && cleanValues.length !== 11){
+        error = "CPF Incorreto!"
+      }
+    }
+    
+    return {
+      error,
+      value
+    }
+  },
+  isCep(value){
+    let error = null
+
+    const cleanValues = value.replace(/\D/g, "")
+    
+    if(cleanValues.length > 0 && cleanValues.length !== 8)
+      error = "CEP Inválido!"
+      
+    return {
+      error,
+      value
+    }
   }
 }
 

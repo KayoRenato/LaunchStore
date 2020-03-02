@@ -207,6 +207,7 @@ form .item > div:nth-child(1){
   margin-bottom: 8px;
 }
 
+form .item .input input,
 form .item input[type="text"],
 form .item input[type="number"],
 form .item textarea,
@@ -648,4 +649,22 @@ color: #333;
 
 }
 
+/*  === USER FORM ===  */
+.user-register.form {
+  max-width: 600px;
+}
 
+.input .error{
+padding: 8px 16px;
+border-radius: 4px;
+background-color: lightcoral;
+text-transform: uppercase;
+color: white;
+font-size: 12px;
+font-weight: bold;
+margin: -2px 4px;
+
+transition: ease-in-out 400ms;
+
+
+}
