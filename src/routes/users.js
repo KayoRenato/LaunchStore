@@ -3,6 +3,7 @@ const routes = express.Router()
 
 const SessionController = require("../app/controllers/SessionController")
 const UserController = require("../app/controllers/UserController")
+const Validator = require("../app/validators/user")
 
 // LOGIN AND LOGOUT
 routes.get('/login', SessionController.forgotForm)
@@ -17,7 +18,7 @@ routes.post('/password-reset',SessionController.reset) //validação do token e 
 
 // USERS
 routes.get('/register', UserController.create)
-routes.post('/register', UserController.save)
+routes.post('/register', Validator.checkFields ,UserController.save)
 
 routes.get('/', UserController.show)
 routes.get('/', UserController.edit)

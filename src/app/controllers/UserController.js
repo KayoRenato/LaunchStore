@@ -1,5 +1,7 @@
 const { date } = require('../lib/utils')
 
+const User = require('../models/User')
+
 module.exports = {
   show(req,res){
 
@@ -7,7 +9,9 @@ module.exports = {
   create(req,res){
     return res.render('user/register')
   },
-  save(req,res){
+  async save(req,res){
+    return res.send('user registred!')
+    
 
   },
   edit(req,res){

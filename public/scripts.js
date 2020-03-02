@@ -72,7 +72,7 @@ const Validate = {
 
     const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ 
 
-    if(!value.match(mailFormat))
+    if(value.length > 0 && !value.match(mailFormat))
       error = "E-mail Inválido!"
     
     return {
