@@ -11,7 +11,6 @@ module.exports = {
   },
   async save(req,res){
     return res.send('user registred!')
-    
 
   },
   edit(req,res){
