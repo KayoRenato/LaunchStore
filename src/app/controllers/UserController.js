@@ -4,13 +4,16 @@ const User = require('../models/User')
 
 module.exports = {
   show(req,res){
-
+    return res.send('Ok, User Cadastrado!')
   },
   create(req,res){
     return res.render('user/register')
   },
   async save(req,res){
-    return res.send('user registred!')
+
+    const userID = await User.saveCreate(req.body)
+
+    return res.redirect('/users')
 
   },
   edit(req,res){
