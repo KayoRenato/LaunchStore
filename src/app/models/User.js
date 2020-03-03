@@ -55,9 +55,6 @@ module.exports ={
       ]
 
       const results = await db.query(query,values)
-      console.log(results)
-      console.log(results.rows)
-      console.log(results.rows[0])
       
       return results.rows[0].id
 

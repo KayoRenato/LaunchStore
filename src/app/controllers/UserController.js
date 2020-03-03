@@ -4,7 +4,7 @@ const User = require('../models/User')
 
 module.exports = {
   show(req,res){
-    return res.send('Ok, User Cadastrado!')
+    return res.render('user/index')
   },
   create(req,res){
     return res.render('user/register')
@@ -12,6 +12,8 @@ module.exports = {
   async save(req,res){
 
     const userID = await User.saveCreate(req.body)
+
+    req.session.userID = userID
 
     return res.redirect('/users')
 
