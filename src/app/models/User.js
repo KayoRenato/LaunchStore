@@ -63,4 +63,30 @@ module.exports ={
     }
    
 },
+  async saveUpdate(userID, objFields) {
+
+    try {
+
+      let query = `UPDATE users SET`
+
+      Object.keys(objFields).map((key, index, array) => {
+        if((index+1) < array.length){
+          query = ` ${query}
+            ${key} = '${objFields[key]}',`
+        } else {
+          // última query sem a ','
+          query = ` ${query}
+            ${key} = '${objFields[key]}'
+            WHERE id = ${userID}
+            RETURNING *`
+        }
+      })
+
+      const result = await db.query(query)
+      return result.rows[0]
+      
+    } catch (err) {
+      console.error(err)
+    }
+  }
 }

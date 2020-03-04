@@ -20,9 +20,9 @@ routes.post('/password-reset',SessionController.reset) //validação do token e 
 routes.get('/register', UserController.create)
 routes.post('/register', Validator.checkFields ,UserController.save)
 
-routes.get('/', UserController.show)
-routes.get('/', UserController.edit)
-routes.put('/', UserController.update)
+routes.get('/', Validator.checkUserID, UserController.show)
+routes.get('/', UserController.edit) //poderia ser o mesmo controler do create, já que a view fields.njk foi preparada para ambas situações
+routes.put('/', Validator.checkPasswordMatch, UserController.update)
 routes.delete('/', UserController.delete)
 
 module.exports = routes

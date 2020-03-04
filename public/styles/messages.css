@@ -25,16 +25,21 @@
 
 }
 
+.messages p{
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: white;
+}
+
 .messages.error{
   background-color: lightcoral;
 
 }
 
-.messages.messages.error p{
-  font-size: 18px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  color: white;
+.messages.sucess{
+  background-color: lightskyblue;
+
 }
 
 .input .error{

@@ -28,5 +28,24 @@ module.exports = {
       style: 'currency',
       currency: 'BRL'
     }).format(price/100)
-  }
+  },
+
+  formatCpfCnpj(cpf_cnpj){
+    if(cpf_cnpj.length > 11){
+      //cnpj - 99.999.999/9999-99 (14)
+      value = cpf_cnpj.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d)/,"$1.$2.$3/$4-$5") 
+
+    }else{
+      //cpf - 999.999.999-99 (11)
+      value = cpf_cnpj.replace(/(\d{3})(\d{3})(\d{3})(\d)/,"$1.$2.$3-$4")
+
+    }
+
+    return value
+  },
+  formatCep(cep){
+    value = cep.replace(/(\d{5})(\d)/,"$1-$2") //99999-999
+
+    return value
+  },
 }

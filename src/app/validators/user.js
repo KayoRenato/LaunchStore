@@ -1,19 +1,28 @@
 const User = require('../models/User')
+const { compare } = require('bcryptjs')
+
+function checkAllFields(body){
+  const keys = Object.keys(body)
+  // Teoricamente nunca chegará nessa validação do backend, pq todos os campos input estão 'ERID' no frontend
+  for(let key of keys){
+    if(body[key]==""){
+      return {
+        user: body,
+        error: 'Por favor, preencha todos os campos!'
+      }
+    }
+  }
+
+}
 
 async function checkFields(req, res, next){
   let { email, cpf_cnpj, password, passwordCheck  } = req.body
+  console.log(req.originalUrl)
   
   // check if has all fields
-  const keys = Object.keys(req.body)
-  // Teoricamente nunca chegará nessa validação do backend, pq todos os campos input estão 'REQUERID' no frontend
-  for(let key of keys){
-    if(req.body[key]==""){
-      return res.render('user/register.njk',{
-        user: req.body,
-        error: 'Por favor, preencha todos os campos!'
-      })
-    }
-  }
+  const fillAllfields = checkAllFields(req.body)
+  if(fillAllfields)
+    return res.render('user/register', fillAllfields)
   
   // check if user exists [email, cpf_cnpj]
   cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
@@ -36,6 +45,45 @@ async function checkFields(req, res, next){
   next()
 }
 
+async function checkUserID(req, res, next){
+  const { userID: id } = req.session
+
+  const user = await User.findOne({WHERE: {id}}) //filtro do DB
+  
+  if(!user) return res.render('user/register',{
+    error: 'Usuário não encontrado!'
+  })
+
+  req.user = user
+
+  next()
+}
+
+async function checkPasswordMatch(req, res, next){
+  const { id, password } = req.body
+
+  const fillAllfields = checkAllFields(req.body)
+
+  if(fillAllfields)
+    return res.render('user/index.njk', fillAllfields)
+
+  const user = await User.findOne({WHERE: {id}})
+
+  const passed = await compare(password, user.password)
+
+  if(!passed)
+    return res.render("user/index", {
+      user: req.body,
+      error: "Senha incorreta!"
+    })
+  
+  req.user = user
+
+  next()
+}
+
 module.exports = {
-  checkFields
+  checkFields,
+  checkUserID,
+  checkPasswordMatch
 }
