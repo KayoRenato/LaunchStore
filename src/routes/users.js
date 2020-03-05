@@ -3,12 +3,14 @@ const routes = express.Router()
 
 const SessionController = require("../app/controllers/SessionController")
 const UserController = require("../app/controllers/UserController")
-const Validator = require("../app/validators/user")
+const { checkFields, checkPasswordMatch, checkUserID} = require("../app/validators/user")
+const SessionValidator = require("../app/validators/session")
+const { DouLogged, DouUser } = require("../app/middlewares/session")
 
 // LOGIN AND LOGOUT
-routes.get('/login', SessionController.forgotForm)
-routes.post('/login',SessionController.login)
-routes.post('/logout',SessionController.logout)
+routes.get('/login', DouLogged, SessionController.loginForm)
+routes.post('/login', SessionValidator.checkLogin,SessionController.login)
+routes.post('/logout', SessionController.logout)
 
 // PASSWORD
 routes.get('/forgot-password', SessionController.forgotForm) //solicitar reset
@@ -18,11 +20,11 @@ routes.post('/password-reset',SessionController.reset) //validação do token e 
 
 // USERS
 routes.get('/register', UserController.create)
-routes.post('/register', Validator.checkFields ,UserController.save)
+routes.post('/register', checkFields ,UserController.save)
 
-routes.get('/', Validator.checkUserID, UserController.show)
+routes.get('/', DouUser, checkUserID, UserController.show)
 routes.get('/', UserController.edit) //poderia ser o mesmo controler do create, já que a view fields.njk foi preparada para ambas situações
-routes.put('/', Validator.checkPasswordMatch, UserController.update)
+routes.put('/', checkPasswordMatch, UserController.update)
 routes.delete('/', UserController.delete)
 
 module.exports = routes

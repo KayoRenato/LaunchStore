@@ -8,6 +8,10 @@ const server = express()
 
 // MIDDLEWARES
 server.use(session)
+server.use((req,res, next)=> {
+  res.locals.session = req.session //disponibilizando o req.session de forma global para o nunjucks
+  next()
+})
 server.use(express.urlencoded({extended:true}))
 server.use(express.static('public')) 
 server.use(methodOverride('_method')) 

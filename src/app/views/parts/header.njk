@@ -29,18 +29,22 @@
         <li class = 'accounts'>
           <a href="/accounts">
             <i class="fas fa-user-circle"></i>
-            Minha Conta
+            {% if session.userName %}
+              Olá, {{session.userName}}
+            {% else %}
+              Login
+            {% endif %}
           </a>
-          {% if user %}
+          {% if session.userID %}
             <ul class="submenu">
               <li>
-                <a href="/users">Configurações</a>
+                <a href="/users">Sua conta</a>
               </li>
               <li>
-                <a href="/buying">Meus Pedidos</a>
+                <a href="/buying">Seus Pedidos</a>
               </li>
               <li>
-                <a href="/selling">Minhas Vendas</a>
+                <a href="/selling">Suas Vendas</a>
               </li>
               <li>
                 <form action="/users/logout" method="post">
