@@ -1,9 +1,10 @@
-section.login.container{
+section.login.container,
+section.forgot-password.container{
   max-width: 500px;
 }
 
 section.login.container .fields{
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
 
 section.login.container .footer-login ul {
@@ -17,4 +18,9 @@ section.login.container .footer-login ul {
 
 .footer-login ul li a:hover{
   color: black;
+}
+
+section.forgot-password.container .fields{
+  margin-top: 16px;
+  margin-bottom: 32px;
 }
