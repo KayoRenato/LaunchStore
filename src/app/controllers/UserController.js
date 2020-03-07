@@ -20,8 +20,9 @@ module.exports = {
     const userID = await User.saveCreate(req.body)
 
     req.session.userID = userID
+    req.session.userName = req.body.name.split(" ")[0]
 
-    return res.redirect('/users')
+    return res.render('user/index')
 
   },
   edit(req,res){
@@ -34,6 +35,8 @@ module.exports = {
 
       cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
       cep = cep.replace(/\D/g,"")
+
+      req.session.userName = req.body.name.split(" ")[0]
 
       const userSaved = await User.saveUpdate(user.id, {
         name,
