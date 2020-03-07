@@ -97,8 +97,8 @@ module.exports ={
     try {
         
       // pegar todos os produtos
-      let resuts = ProductsModel.find(userID)
-      const productsDB = (await resuts).rows
+      let results = await db.query('SELECT * FROM products WHERE user_id = $1', [userID])
+      const productsDB = results.rows
 
       // pegar todas as imagens
       const allFilesPromise = await productsDB.map(product => ProductsModel.files(product.id))
