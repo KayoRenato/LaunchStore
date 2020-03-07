@@ -29,7 +29,7 @@ CREATE TABLE "files" (
 );
 
 ALTER TABLE "products" ADD FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
-ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id");
+ALTER TABLE "files" ADD FOREIGN KEY ("product_id") REFERENCES "products" ("id") ON DELETE CASCADE;
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
@@ -46,7 +46,7 @@ CREATE TABLE "users" (
 );
 
 -- FOREIGN KEY users
-ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "products" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
 -- PROCEDURES
 

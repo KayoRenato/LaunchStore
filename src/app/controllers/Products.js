@@ -26,6 +26,8 @@ module.exports = {
 
     if(req.files.length == 0) return res.send('Please, send at least one image!')
 
+    req.body.user_id = req.session.userID
+    
     const saveDB = await Product.saveCreate(req.body) //retorna um array de rows com o ID do produto salvo
     const productResID = saveDB.rows[0].id
 

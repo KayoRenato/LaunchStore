@@ -25,7 +25,6 @@ module.exports = {
 
   },
   edit(req,res){
-
     return res.render('user/register')
   },
   async update(req,res){
@@ -56,8 +55,23 @@ module.exports = {
       })
     }
   },
-  delete(req,res){
+  async delete(req,res){
+    try {
+      
+      await User.delete(req.session.userID)
+      req.session.destroy()
 
+      res.render("session/login.njk", {
+        sucess: "Conta excluída com sucesso!"
+      })
+    } 
+    catch (err) {
+      console.error(err)
+      return res.render("user/index.njk", {
+        user: req.body,
+        error: "Erro ao tentar excluir sua conta. Por favor, tente novamente mais tarde."
+      })
+    }
   }
 
 }
