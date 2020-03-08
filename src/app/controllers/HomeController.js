@@ -1,23 +1,20 @@
-const { formatPrice } = require('../lib/utils')
-
 const Product = require('../models/Product')
+
+const { formatPrice } = require('../lib/utils')
 
 module.exports = {
   async index(req,res) {
     try {
-        let result = await Product.all()
-    
-        const products = result.rows
+        const products = await Product.all()
     
         if(!products) return res.send('Product not Found!')
     
-        async function getImage(ProductID){
-          let result = await Product.files(ProductID)
+        function getImage(ProductID){
+          let files = Product.files(ProductID)
           //criando um array de path das imgs daquele produto
-          const imgPaths = result.rows.map(img => (`${req.protocol}://${req.headers.host}${img.path.replace("public","")}`))
-    
+          files = files.map(img => (`${req.protocol}://${req.headers.host}${img.path.replace("public","")}`))
           //retornando apenas o path da img principal
-          return imgPaths[0]
+          return files[0]
         }
     
         const productsPromise =  products.map(async product => {
@@ -30,8 +27,6 @@ module.exports = {
         lastAdded = await Promise.all(productsPromise)
     
         return res.render('home/index.njk', {products: lastAdded})
-      
-      
     } 
     catch (err) {
       console.error(err)

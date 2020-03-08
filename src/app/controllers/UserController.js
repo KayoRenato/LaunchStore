@@ -1,29 +1,49 @@
-const { formatCpfCnpj, formatCep } = require('../lib/utils')
+const { hash } = require("bcryptjs")
+const { unlinkSync } = require('fs')
 
 const User = require('../models/User')
+const Product = require('../models/Product')
+
+const { formatCpfCnpj, formatCep } = require('../lib/utils')
 
 module.exports = {
   async show(req,res){
-    const { user } = req // veio do checkUserID
+    try {
+      const { user } = req // veio do checkUserID
+      user.cpf_cnpj =  formatCpfCnpj(user.cpf_cnpj)
+      user.cep =  formatCep(user.cep)
 
-    user.cpf_cnpj =  formatCpfCnpj(user.cpf_cnpj)
-    user.cep =  formatCep(user.cep)
-
-    return res.render('user/index.njk', { user })
+      return res.render('user/index.njk', { user })
+    } catch (err) {
+      console.error(err);
+    }
+    
   },
-  create(req,res){ //registerForm
-
+  create(req,res){ 
     return res.render('user/register')
   },
   async save(req,res){
+    try {
+      let { password, cpf_cnpj, cep  } = req.body
 
-    const userID = await User.saveCreate(req.body)
+      password = await hash( password, 8)
+      cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
+      cep = cep.replace(/\D/g, "")
 
-    req.session.userID = userID
-    req.session.userName = req.body.name.split(" ")[0]
+      const userID = await User.saveCreate({
+        ...req.body,
+        password,
+        cpf_cnpj,
+        cep
+      })
 
-    return res.render('user/index')
+      req.session.userID = userID
+      req.session.userName = req.body.name.split(" ")[0]
 
+      return res.render('user/index')
+    } catch (err) {
+      console.error(err);
+    }
   },
   edit(req,res){
     return res.render('user/register')
@@ -31,7 +51,7 @@ module.exports = {
   async update(req,res){
     try {
       let { user } = req
-      let { name, email, cpf_cnpj, cep, address } = req.body
+      let { cpf_cnpj, cep } = req.body
 
       cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
       cep = cep.replace(/\D/g,"")
@@ -39,11 +59,9 @@ module.exports = {
       req.session.userName = req.body.name.split(" ")[0]
 
       const userSaved = await User.saveUpdate(user.id, {
-        name,
-        email,
+        ...req.body,
         cpf_cnpj,
         cep,
-        address
       })
 
       return res.render("user/index.njk", {
@@ -60,15 +78,31 @@ module.exports = {
   },
   async delete(req,res){
     try {
-      
-      await User.delete(req.session.userID)
+      const { userID: id } = req.session
+      let products = await Product.findAll({ WHERE: { user_id: id  } })
+
+      let filesArray = await products.map(product => Product.files(product.id))
+      filesArray = await Promise.all(filesArray)
+
+      await User.delete(id)
       req.session.destroy()
+
+      filesArray.map(fileArray => {
+        fileArray.map(file => {
+          try {
+            unlinkSync(file.path)
+          } catch (err) {
+            console.error(err)
+          }
+         })
+       }
+      )
 
       res.render("session/login.njk", {
         sucess: "Conta excluída com sucesso!"
       })
-    } 
-    catch (err) {
+
+    }catch (err) {
       console.error(err)
       return res.render("user/index.njk", {
         user: req.body,

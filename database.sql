@@ -1,3 +1,6 @@
+DROP SCHEMA public CASCADE;
+CREATE SCHEMA public;
+
 -- Não é possível realizar DROP e CREATE DATABASE na mesma query de criação de tabelas. 
 DROP DATABASE IF EXISTS launchstoredb;
 CREATE DATABASE launchstoredb;
@@ -87,3 +90,13 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+
+-- TO RUN SEEDS
+DELETE FROM users;
+DELETE FROM products;
+DELETE FROM files;
+
+-- RESTART SEQUENCE FROM AUTO INCREMENT TABLES IDS
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+ALTER SEQUENCE products_id_seq RESTART WITH 1;
+ALTER SEQUENCE files_id_seq RESTART WITH 1;
