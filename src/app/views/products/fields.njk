@@ -49,10 +49,10 @@
       <p>Selecione até 6 fotos</p>
     </div>
     <div id="photos-preview">
-      {% if files %}
-        {% for img in files %}
-          <div class="photo" id="{{img.id}}">
-            <img src="{{img.src}}" alt="{{img.name}}">
+      {% if product.files %}
+        {% for file in product.files %}
+          <div class="photo" id="{{file.id}}">
+            <img src="{{file.src}}" alt="{{file.name}}">
             <i 
               class="fas fa-trash-alt"
               onclick="PhotosUpload.removeImgAfterDB(event)"
@@ -72,7 +72,7 @@
         type="text"
         name="price"
         placeholder="Preço do Produto"
-        value="{{product.price}}"
+        value="{{product.formattedPrice}}"
         onkeydown="Mask.apply(this,'formatBRL')"
       >
   </div>

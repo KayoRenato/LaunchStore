@@ -23,21 +23,31 @@ module.exports = {
   },
   async search(params){
     const { filter, category } = params
-    let query ="",
-        filterQuery = `WHERE `
+    let query ="", filterQuery = ""
     
+    if (filter) {
+      filterQuery += `
+        WHERE
+        (products.name ilike '%${filter}%' 
+        OR products.description ilike '%${filter}%') 
+      `
+    } else {
+      filterQuery += `
+        WHERE 1=1
+      `
+    }
+
     if(category){
-      filterQuery = `${filterQuery}
-        products.category_id = ${category} 
-        AND`
+      filterQuery += `
+        AND products.category_id = ${category} 
+        `
     }
   
-    filterQuery = `
-      ${filterQuery}
-      (products.name ilike '%${filter}%' 
-      OR products.description ilike '%${filter}%') 
+    filterQuery += `
+      AND status != 0
+      AND quantity > 0
     `
-  
+
     query = `
       SELECT products.*,
         categories.name AS category_name

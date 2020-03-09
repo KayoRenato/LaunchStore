@@ -1,16 +1,14 @@
 const Product = require('../models/Product')
-
-const { formatPrice } = require('../lib/utils')
+const LoadProductService = require("../services/LoadProductService")
 
 module.exports = {
   async index(req,res) {
     try {
-        let results,
-            params = {}
+        let params = {}
 
         const {filter, category } = req.query
 
-        if(!filter) return res.redirect('/')
+        // if(!filter) return res.redirect('/') // - bloqueia a pesquisa a todos os items disponíveis aptos para venda, apenas pressionando enter no search
 
         params.filter = filter
 
@@ -18,23 +16,11 @@ module.exports = {
           params.category = category
         }
 
-        results = await Product.search(params)
+        let products = await Product.search( params )
 
-        async function getImage(ProductID){
-          let files = await Product.files(ProductID)
-          files = files.map(img => (`${req.protocol}://${req.headers.host}${img.path.replace("public","")}`))
-    
-          return files[0]
-        }
+        const productsPromise = products.map( LoadProductService.format ) // product => LoadProductService.format(product) - É a mesma coisa
 
-        const productsPromise = results.map(async product =>{
-          product.img = await getImage(product.id)
-          product.oldPrice = formatPrice(product.old_price)
-          product.priceNew = formatPrice(product.price)
-          return product
-        })
-
-        const products = await Promise.all(productsPromise)
+        products = await Promise.all(productsPromise)
 
         const search = {
           term: req.query.filter,

@@ -22,7 +22,6 @@ async function format(product){
   product.formattedOldPrice = formatPrice(product.old_price)
   product.formattedPrice = formatPrice(product.price)
 
-
   const { day, hour, minutes, monthExt } = date(product.updated_at)
   
   product.published = {
@@ -38,7 +37,7 @@ const LoadService = {
     this.filter = filter
     return this[service]()
   },
-  product(){
+  async product(){
     try {
       const product = await Product.findOne(this.filter)
       return format(product)
@@ -49,7 +48,7 @@ const LoadService = {
   },
   async products(){
     try {
-      const products = await Product.findAll(this.filter)
+      const products = await Product.all(this.filter) //.findAll() - usado por Mayk
       const productsPromise = products.map(format) // products.map( product => format(product) )  - É a mesma coisa            
       
       return Promise.all(productsPromise)

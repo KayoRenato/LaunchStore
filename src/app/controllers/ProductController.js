@@ -1,6 +1,8 @@
 const Category = require('../models/Category')
 const Product = require('../models/Product')
 const Files = require('../models/Files')
+const LoadProductService = require("../services/LoadProductService")
+
 const { unlinkSync } = require('fs')
 
 const { formatPrice, date } = require('../lib/utils')
@@ -53,32 +55,11 @@ module.exports = {
   },
   async show(req, res) {
     try {
-      const product = await Product.find(req.params.id) 
+      const product = await LoadProductService.load('product', {
+        WHERE: { id: req.params.id } 
+      }) 
 
-      if (!product) return res.send("Product not found!")
-  
-      const { day, hour, minutes, monthExt } = date(product.updated_at)
-  
-      product.published = {
-        day: `${day} de ${monthExt}`,
-        hour: `${hour}h${minutes}`
-      }
-  
-      if (product.price < product.old_price) {
-        product.oldPrice = formatPrice(product.old_price)
-      }
-  
-      product.old_price = formatPrice(product.old_price)
-      product.price = formatPrice(product.price)
-  
-      let files = await Product.files(product.id)
-      files = files.map(file => ({
-        name: file.name,
-        path: file.path,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-      }))
-  
-      return res.render('products/show', { product, files }) 
+      return res.render('products/show', { product, files: product.files }) 
 
     } catch (err) {
       console.error(err);
@@ -86,23 +67,12 @@ module.exports = {
   },
   async edit(req, res) {
     try {
-      const product = await Product.find(req.params.id)
-
-      if (!product) return res.send("Product not found!")
-
-      product.price = formatPrice(product.price)
-
+      const product = await LoadProductService.load('product', {
+        WHERE: { id: req.params.id } 
+      }) 
       const categories = await Category.findAll() //retorna um array de rows com todas as categories do DB
 
-      let files = await Product.files(product.id)
-      files = files.map(file => ({
-        id: file.id,
-        name: file.name,
-        path: file.path,
-        src: `${req.protocol}://${req.headers.host}${file.path.replace("public", "")}`
-      }))
-
-      return res.render('products/edit', { product, categories, files })
+      return res.render('products/edit', { product, categories })
 
     } catch (err) {
       console.error(err);
@@ -162,7 +132,7 @@ module.exports = {
         status
       })
   
-      return res.redirect(`products/${id}`) // redireciona para página edit
+      return res.redirect(`products/${id}`)
     } catch (err) {
       console.error(err);
     }

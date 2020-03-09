@@ -3,7 +3,7 @@ const multer = require('../app/middlewares/multer')
 const { DouUser } = require('../app/middlewares/session')
 const routes = express.Router()
 
-const ProductController = require("../app/controllers/Products")
+const ProductController = require("../app/controllers/ProductController")
 const SearchController = require("../app/controllers/SearchController")
 
 // SEARCH
