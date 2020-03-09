@@ -6,7 +6,7 @@ function find(filters, table){
   if(filters){ 
     Object.keys(filters).map(key => {
       // WHERE || OR || AND
-      query += `${key}`
+      query += ` ${key}`
 
       Object.keys(filters[key]).map( field => {
         query += ` ${field} = '${filters[key][field]}'`
@@ -14,7 +14,6 @@ function find(filters, table){
     })
   }
  
-
   return db.query(query)
 }
 
@@ -85,12 +84,12 @@ const Base = {
       let fieldsUpdate = [] 
       
       Object.keys(fields).map( key => {
-        const inputUpdate = `${key} = '${fields[key]}` // category_id = '$1'
+        const inputUpdate = `${key} = ('${fields[key]}')` // category_id = '$1'
         fieldsUpdate.push(inputUpdate)
       })
 
       let query = `UPDATE ${this.table} SET
-        ${fieldsUpdate.join(",")} WHERE id = ${id}
+        ${fieldsUpdate.join(", ")} WHERE id = '${id}'
         RETURNING *`
       
       const result = await db.query(query)

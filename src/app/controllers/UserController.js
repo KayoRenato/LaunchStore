@@ -24,23 +24,29 @@ module.exports = {
   },
   async save(req,res){
     try {
-      let { password, cpf_cnpj, cep  } = req.body
+      let { name, email, password, cpf_cnpj, cep, address  } = req.body
 
       password = await hash( password, 8)
       cpf_cnpj = cpf_cnpj.replace(/\D/g, "")
       cep = cep.replace(/\D/g, "")
 
-      const userID = await User.saveCreate({
-        ...req.body,
+      const userSaved = await User.saveCreate({
+        name,
+        email,
         password,
         cpf_cnpj,
-        cep
+        cep,
+        address
       })
 
-      req.session.userID = userID
+      req.session.userID = userSaved
       req.session.userName = req.body.name.split(" ")[0]
 
-      return res.render('user/index')
+      return res.render('user/index.njk', {
+        user: {...req.body, id:userSaved},
+        sucess:"Conta criada com sucesso!"
+
+      })
     } catch (err) {
       console.error(err);
     }
@@ -51,7 +57,7 @@ module.exports = {
   async update(req,res){
     try {
       let { user } = req
-      let { cpf_cnpj, cep } = req.body
+      let { name, email, cpf_cnpj, cep, address } = req.body
 
       cpf_cnpj = cpf_cnpj.replace(/\D/g,"")
       cep = cep.replace(/\D/g,"")
@@ -59,9 +65,11 @@ module.exports = {
       req.session.userName = req.body.name.split(" ")[0]
 
       const userSaved = await User.saveUpdate(user.id, {
-        ...req.body,
+        name,
+        email,
         cpf_cnpj,
         cep,
+        address
       })
 
       return res.render("user/index.njk", {
@@ -98,7 +106,9 @@ module.exports = {
        }
       )
 
-      res.render("session/login.njk", {
+      
+      return res.render("session/login.njk", {
+        session: null,
         sucess: "Conta excluída com sucesso!"
       })
 

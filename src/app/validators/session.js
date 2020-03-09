@@ -35,7 +35,6 @@ async function checkEmail(req, res, next) {
   try {
     const { email } = req.body
     const user = await User.findOne({WHERE:{email}})
-
     if(!user) return res.render(`session/forgot-password.njk`,{
       user: req.body,
       error: 'E-mail não encontrado cadastrado!'

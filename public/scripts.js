@@ -210,8 +210,6 @@ const PhotosUpload = {
   },
   removeImgAfterDB(event){
     const photoDiv = event.target.parentNode //selecionar o elemento PAI do elemento DOM
-    console.log(event.target) //excluir depois
-    console.log(photoDiv) //excluir depois
 
     if(photoDiv.id){
       const removedFiles = document.querySelector('input[name="removed_files"]')
@@ -219,7 +217,6 @@ const PhotosUpload = {
         removedFiles.value += `${photoDiv.id},`
       }
     }
-
 
     photoDiv.remove();
   }

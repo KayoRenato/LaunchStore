@@ -16,8 +16,7 @@ function checkAllFields(body){
 }
 
 async function checkFields(req, res, next){
-  let { email, cpf_cnpj, password, passwordCheck  } = req.body
-  console.log(req.originalUrl)
+  let { email, cpf_cnpj, password, passwordCheck } = req.body
   
   // check if has all fields
   const fillAllfields = checkAllFields(req.body)

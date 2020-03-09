@@ -6,8 +6,9 @@ const Product = require("./src/app/models/Product")
 const File = require("./src/app/models/Files")
 
 let usersIDs = [], productsIDs = []
-const totalUsers = 3
-const totalProducts = 10
+const totalUsers = 5
+const totalProducts = 15
+const totalFiles = 40
 
 async function createUsers() {
   try {
@@ -54,10 +55,10 @@ async function createProducts() {
 
     }
 
-    const productsPromise = products.map(product => Product.saveCreate(product))
+    const productsPromise = products.map( product => Product.saveCreate(product)) 
     productsIDs = await Promise.all(productsPromise)
 
-    while (files.length < 50) {
+    while (files.length < totalFiles) {
       files.push({
         name: faker.image.image(),
         path: `public/images/placeholder.png`,

@@ -1,6 +1,6 @@
 const crypto = require("crypto")
 const { hash } = require("bcryptjs")
-const { saveUpdate } = require("../models/User")
+const User = require("../models/User")
 const mailer = require("../lib/mailer")
 
 module.exports = {
@@ -31,7 +31,7 @@ module.exports = {
 
       now = now.setMinutes(now.getMinutes()+ 5) // 5 minutos para expirar o token
 
-      await saveUpdate(user.id, {
+      await User.saveUpdate(user.id, {
         reset_token: token,
         reset_token_expires: now
       })
@@ -77,7 +77,7 @@ module.exports = {
       const newPassword = await hash(password, 8)
 
       // Atualizar usuário
-      await saveUpdate(user.id, {
+      await User.saveUpdate(user.id, {
         password: newPassword,
         reset_token: "",
         reset_token_expires: ""
@@ -88,7 +88,6 @@ module.exports = {
         user: req.body,
         sucess: "Senha Atualizada! Faça o seu login."
       })
-
 
     } catch (err) {
       console.error(err)
