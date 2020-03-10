@@ -27,4 +27,6 @@ routes.get('/', UserController.edit) //poderia ser o mesmo controler do create, 
 routes.put('/', checkPasswordMatch, UserController.update)
 routes.delete('/', UserController.delete)
 
+routes.get('/ads', UserController.ads)
+
 module.exports = routes
