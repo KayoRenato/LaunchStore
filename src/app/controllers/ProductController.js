@@ -72,13 +72,6 @@ module.exports = {
     try {
       let { id, category_id, name, description, price, old_price, quantity, status } = req.body
 
-      const keys = Object.keys(req.body)
-  
-      for (let key of keys) {
-        if (req.body[key] == "" && key != 'removed_files') {
-          return res.send(`Please, fill ${key} field!`)
-        }
-      }
   
       if (req.files.length != 0) {
         const filesPromise = req.files.map(file => 

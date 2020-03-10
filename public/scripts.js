@@ -114,7 +114,15 @@ const Validate = {
   },
   allFields(event){
     const items = document.querySelectorAll('.item input, .item select, .item textarea')
-    let inputs = true
+    const price = document.querySelector('.item input[name=price]')
+  
+    let inputs = true, values = true
+
+    const valuePrice = price.value.replace(/\D/g, "")
+
+    if(valuePrice < 100){
+      values = false
+    }
 
     for(item of items){
         if(item.value == ""){
@@ -122,12 +130,60 @@ const Validate = {
         }
     }
 
-    if(!inputs) {
+    if(!inputs || !values) {
       const message = document.createElement('div')
       const text = document.createElement('p')
       message.classList.add('messages')
       message.classList.add('error')
-      text.innerHTML = 'Por favor, prencha todos os campos!'
+      if(!inputs){
+        text.innerHTML = `Por favor, prencha todos os campos!`
+      } 
+      else {
+        text.innerHTML = 'Por favor, insira um valor válido!'
+      }
+      message.append(text)
+      document.querySelector('body').append(message)
+
+      event.preventDefault()
+    }
+  },
+  allFieldsUpdate(event){
+    const items = document.querySelectorAll('.item input[name=name], .item input[name=quantity],.item textarea')
+    const imgs = document.querySelectorAll('.item img')
+    const price = document.querySelector('.item input[name=price]')
+  
+    let inputs = true, values = true, previews = true
+
+    const gallery = imgs.length
+    const valuePrice = price.value.replace(/\D/g, "")
+
+    if(!gallery){
+      previews = false
+    }
+
+    if(valuePrice < 100){
+      values = false
+    }
+
+    for(item of items){
+        if(item.value == ""){
+          inputs = false
+        }
+    }
+
+    if(!inputs || !values || !previews) {
+      const message = document.createElement('div')
+      const text = document.createElement('p')
+      message.classList.add('messages')
+      message.classList.add('error')
+      if(!inputs){
+        text.innerHTML = `Por favor, prencha todos os campos!`
+      } 
+      else if(!previews) {
+        text.innerHTML = 'Por favor, insira pelo menos uma imagem!'
+      } else {
+        text.innerHTML = 'Por favor, insira um valor válido!'
+      }
       message.append(text)
       document.querySelector('body').append(message)
 
