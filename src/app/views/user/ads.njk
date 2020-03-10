@@ -13,15 +13,16 @@
           </div>
 
           <div class="info">
-            <div class="title">{{ product.title }}</div>
+            <div class="title">{{ product.name }}</div>
             <div class="price">{{ product.formattedPrice }}</div>
             <div class="published">Publicado em {{ product.formattedCreatedAt }}</div>
+          
+            <div class="action">
+              <a href="/products/{{product.id}}" >Ver</a>
+              <a href="/products/{{product.id}}/edit" >Editar</a>
+            </div>
           </div>
 
-          <div class="action">
-            <a href="/products/{{product.id}}">Ver</a>
-            <a href="/products/{{product.id}}/edit">Editar</a>
-          </div>
         </div>
       {% endfor %}
     </div>
