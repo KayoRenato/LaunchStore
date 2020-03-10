@@ -1,7 +1,9 @@
 const express = require('express')
+const routes = express.Router()
+
 const multer = require('../app/middlewares/multer')
 const { DouUser } = require('../app/middlewares/session')
-const routes = express.Router()
+const { DouFillAllFields } = require('../app/validators/product')
 
 const ProductController = require("../app/controllers/ProductController")
 const SearchController = require("../app/controllers/SearchController")

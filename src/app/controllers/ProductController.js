@@ -18,16 +18,6 @@ module.exports = {
   },
   async save(req, res) {
     try {
-      // Validação Backend de envio dos dados //É possível fazer essa validação no Frontend antes do envio
-      const keys = Object.keys(req.body)
-
-      for (let key of keys) {
-        if (req.body[key] == "") {
-          return res.send(`Please, fill ${key} field!`)
-        }
-      }
-
-      if (req.files.length == 0) return res.send('Please, send at least one image!')
 
       let { category_id, name, description, price, old_price, quantity, status } = req.body
 

@@ -111,6 +111,28 @@ const Validate = {
       error,
       value
     }
+  },
+  allFields(event){
+    const items = document.querySelectorAll('.item input, .item select, .item textarea')
+    let inputs = true
+
+    for(item of items){
+        if(item.value == ""){
+          inputs = false
+        }
+    }
+
+    if(!inputs) {
+      const message = document.createElement('div')
+      const text = document.createElement('p')
+      message.classList.add('messages')
+      message.classList.add('error')
+      text.innerHTML = 'Por favor, prencha todos os campos!'
+      message.append(text)
+      document.querySelector('body').append(message)
+
+      event.preventDefault()
+    }
   }
 }
 
