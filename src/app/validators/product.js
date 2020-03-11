@@ -1,5 +1,3 @@
-const Category = require('../models/Category')
-
 async function DouFillAllFields(req, res, next){
   const keys = Object.keys(req.body)
 

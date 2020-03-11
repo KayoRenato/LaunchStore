@@ -57,6 +57,17 @@ const LoadService = {
       
     }
   },
+  async productsUser(){
+    try {
+      const products = await Product.findAll(this.filter) 
+      const productsPromise = products.map(format) 
+      
+      return Promise.all(productsPromise)
+    } catch (err) {
+      console.error(err);
+      
+    }
+  },
   format,
 
 }

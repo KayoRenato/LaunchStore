@@ -56,7 +56,7 @@
 
       <div class="price_buy">
         <div class="price">
-          <h3>{{product.formattedPrice}}</h3>
+          <h4>{{product.formattedPrice}}</h4>
           {% if product.old_price > product.price %}
           <span class="old_prive">{{product.formattedOldPrice}}</span>
           {% endif %}
@@ -67,7 +67,10 @@
         {% elif product.quantity == 0 %}
           <p class="unavailable">Fora de Estoque</p>
         {% else %}
-          <button class="button">Comprar</button>
+          <form action="/users/orders" method="post">
+            <input type="hidden" name="id" value="{{product.id}}">
+            <button class="button">Comprar</button>
+          </form>
         {% endif %}
         </div>
       </div>
