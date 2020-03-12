@@ -61,17 +61,30 @@
           <span class="old_prive">{{product.formattedOldPrice}}</span>
           {% endif %}
         </div>
+
         <div class="buy">
-        {% if product.status == 0 %}
-          <p class="unavailable">Indisponível</p>
-        {% elif product.quantity == 0 %}
-          <p class="unavailable">Fora de Estoque</p>
-        {% else %}
-          <form action="/users/orders" method="post">
-            <input type="hidden" name="id" value="{{product.id}}">
-            <button class="button">Comprar</button>
-          </form>
-        {% endif %}
+          {% if product.user_id == session.userID %}
+            <div class="infor">
+              <p class="user_infor">Seu Produto</p>
+              <p class="user_infor"> <span>Quantidade:</span> {{product.quantity}}</p>
+              <p class="user_infor"><span>Status:</span>
+                {%if product.status == 0 %}
+                Indisponível
+                {% else %}
+                Disponível
+                {%endif%} 
+               </p>
+            </div>
+          {% elif product.quantity == 0 %}
+            <p class="unavailable">Fora de Estoque</p>
+          {% elif product.status == 0 %}
+            <p class="unavailable">Indisponível</p>
+          {% else %}
+            <form action="/users/orders" method="post">
+              <input type="hidden" name="id" value="{{product.id}}">
+              <button class="button">Comprar</button>
+            </form>
+          {% endif %}
         </div>
       </div>
     </div>

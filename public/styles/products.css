@@ -353,6 +353,26 @@ color: #333;
   margin: 0px 8px;
 }
 
+.price_buy .buy span:first-child{
+  font-weight: bold;
+  color: #777;
+}
+
+.price_buy .buy p:first-child{
+  font-weight: bold;
+  color: #333;
+
+  text-align: center;
+  text-transform: uppercase;
+
+  border-bottom: 1px solid rgba(119, 119, 119, .2);
+  margin-bottom: 4px;
+}
+
+.price_buy .buy{
+  color: #333;
+}
+
 .price_buy .buy .button{
   background-color: var(--color-fourth);
   transition: all 400ms;

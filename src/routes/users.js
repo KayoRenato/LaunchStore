@@ -31,6 +31,7 @@ routes.delete('/', UserController.delete)
 
 routes.get('/ads', UserController.ads)
 
+// routes.get('/orders', (req, res) => res.render('orders/success.nkj'))
 routes.post('/orders', DouUser, OrderController.buy)
 
 module.exports = routes

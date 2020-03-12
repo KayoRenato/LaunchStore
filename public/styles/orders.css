@@ -1,0 +1,60 @@
+.order-success,
+.order-error {
+  padding: 0;
+  padding-bottom: 30px;
+  width: 700px;
+  text-align: center;
+  margin: auto;
+}
+
+.order-success h2,
+.order-error h2{
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.order-success p,
+.order-error p {
+  color: #777;
+}
+
+.order-success .success-lottie,
+.order-error .error-lottie{
+  height: 200px;
+}
+
+.order-success .success-lottie{
+  margin-bottom: 10px;
+
+}
+
+.order-error .error-lottie{
+  height: 160px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+
+}
+
+
+.order-success .button,
+.order-error .button {
+  width: 300px;
+  margin: 20px auto;
+}
+
+.order-success .button{
+  background-color: rgba(21, 200, 45, 0.9);
+}
+
+.order-success .button:hover{
+  background-color: rgba(36, 149, 51, 0.8);
+}
+
+.order-error .button{
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.order-error .button:hover{
+  background-color: rgba(150, 0, 0, 0.8);
+}
