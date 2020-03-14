@@ -100,7 +100,7 @@
 }
 
 .cart button.delete i{
-  color: lightcoral;
+  color: rgb(172, 172, 172);
 }
 
 .cart button.delete i:hover{

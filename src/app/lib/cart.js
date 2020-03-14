@@ -1,6 +1,5 @@
 const { formatPrice } = require("./utils")
 
-
 const Cart = {
   init(oldCart){
     if(oldCart){
@@ -34,7 +33,8 @@ const Cart = {
       this.items.push(inCart)
     }
     
-    if(inCart.quantity >=  addProduct.quantity) return 'Produto fora de estoque!'
+    if(inCart.quantity >=  addProduct.quantity) 
+      return this
     
     inCart.quantity++
     inCart.price += inCart.product.price
