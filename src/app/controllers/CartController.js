@@ -7,6 +7,7 @@ module.exports = {
       const product = await LoadProductService.load('product', { WHERE:  { id: 7 } })
 
       let { cart } = req.session
+      
       cart = Cart.init(cart).addOne(product)
 
      return res.render('cart/index.njk', { cart })
