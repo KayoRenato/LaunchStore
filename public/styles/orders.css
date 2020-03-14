@@ -44,11 +44,12 @@
 }
 
 .order-success .button{
-  background-color: rgba(21, 200, 45, 0.9);
+  background-color: rgb(36, 195, 36);
+
 }
 
 .order-success .button:hover{
-  background-color: rgba(36, 149, 51, 0.8);
+  background-color: rgb(11, 139, 11);
 }
 
 .order-error .button{
