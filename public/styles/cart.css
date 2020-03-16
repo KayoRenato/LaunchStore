@@ -61,7 +61,8 @@
 
 }
 
-.cart .item .title{
+.cart .item .title,
+.cart-empty h2{
   color: #333;
   font-size: 18px;
 }
@@ -146,4 +147,41 @@
 
 .cart .button.order:hover{
   background-color: rgb(11, 139, 11);
+}
+
+/* Cart Vazio */
+
+.cart-empty {
+  position: relative;
+  text-align: center;
+  height: 400px;
+  width: 650px;
+}
+
+.cart-empty .circ{
+  margin: 30px auto;
+  position: relative;
+}
+
+.cart-empty i{
+  padding: 8px 16px;
+  margin: 60px auto;  
+}
+
+
+.cart-empty a{
+  position: relative;
+  z-index: 100;
+  color: rgb(255, 179, 0);
+  transition: all 400ms;
+}
+
+.cart-empty a:hover{
+  color: rgb(175, 125, 9);
+}
+
+
+.cart-empty .load-lottie{
+  position: absolute;
+  height: 200px;
 }
