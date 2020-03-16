@@ -30,5 +30,21 @@ module.exports = {
       console.error(err);
       
     }
+  },
+  async removeOne(req,res){
+    try {
+      const { id } = req.params
+      let { cart } = req.session
+
+      if(!cart) return res.redirect('/cart')
+
+      req.session.cart = await Cart.init(cart).removeOne(id)
+
+      return res.redirect('/cart')
+
+    } catch (err) {
+      console.error(err);
+      
+    }
   }
 }
