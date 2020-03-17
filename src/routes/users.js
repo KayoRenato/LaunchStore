@@ -3,7 +3,6 @@ const routes = express.Router()
 
 const SessionController = require("../app/controllers/SessionController")
 const UserController = require("../app/controllers/UserController")
-const OrderController = require("../app/controllers/OrderController")
 
 const { checkFields, checkPasswordMatch, checkUserID} = require("../app/validators/user")
 const { checkEmail, checkLogin, checkResetPassword } = require("../app/validators/session")
@@ -30,8 +29,5 @@ routes.put('/', checkPasswordMatch, UserController.update)
 routes.delete('/', UserController.delete)
 
 routes.get('/ads', UserController.ads)
-
-// routes.get('/orders', (req, res) => res.render('orders/success.nkj'))
-routes.post('/orders', DouUser, OrderController.buy)
 
 module.exports = routes
