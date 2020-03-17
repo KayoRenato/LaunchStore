@@ -2,6 +2,7 @@ const LoadProductService = require('../services/LoadProductService')
 const User = require('../models/User')
 const Order = require('../models/Order')
 
+const { formatPrice, date } = require("../lib/utils")
 const mailer = require("../lib/mailer")
 const Cart = require("../lib/cart")
 const logo = "https://www.imagemhost.com.br/images/2020/03/12/Screen-Shot-2020-03-11-at-11.55.25-PM.png"
@@ -26,8 +27,51 @@ const emailBuy = (seller, buyer, product) =>
   `
 
 
-
 module.exports = {
+  async index(req, res){
+    try {
+      // pegar todos pedidos do usuário
+      let orders = await Order.findAll({ WHERE: {buyer_id: req.session.userID}})
+
+        const OrdersPromise = orders.map(async order => {
+          // detalhes do produto
+          order.product = await LoadProductService.load('product', { WHERE: { id: order.product_id } })
+
+          // detalhes do comprador
+          order.buyer = await User.findOne({ WHERE: {id: buyer_id} })
+
+          // detalhes do vendedor
+          order.seller = await User.findOne({ WHERE: {id: seller_id} })
+
+          // formatação de preço 
+          order.formattedPrice = formatPrice(order.price)
+          order.formattedTotal = formatPrice(order.total)
+
+          // formatação de status
+          const statuses = {
+            open: 'Aberto',
+            sold: 'Vendido',
+            canceled: 'Candelado'
+          }
+
+          order.formattedStatus = statuses[order.status]
+
+          // atualizado em ...
+          const updatedAt = date(order.updated_at)
+          order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}`
+
+          return order
+        })
+
+      orders = await Promise.all(OrdersPromise)
+      
+      return res.render("orders/index", { orders })
+
+    } catch (err) {
+      console.error(err);
+      
+    }
+  }, 
   async buy(req,res){
     try {
       // Pegar produtos do carrinho
