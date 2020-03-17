@@ -5,7 +5,7 @@ const LoadProductService = require('../services/LoadProductService')
 
 const { hash } = require("bcryptjs")
 const { unlinkSync } = require('fs')
-const { formatCpfCnpj, formatCep } = require('../lib/utils')
+const { formatCpfCnpj, formatCep, date } = require('../lib/utils')
 
 module.exports = {
   async show(req,res){
@@ -122,9 +122,20 @@ module.exports = {
     }
   },
   async ads(req,res){
-    const products = await LoadProductService.load('productsUser',
+    let products = await LoadProductService.load('productsUser',
       { WHERE: { user_id: req.session.userID } }
     )
+    
+    products = products.map( product => {
+
+      const productCreatedAt = date(product.created_at)
+      const productUpdatedAt = date(product.updated_at)
+      product.formattedCreatedAt = `${productCreatedAt.day}/${productCreatedAt.month}/${productCreatedAt.year}`
+      product.formattedUpdatedAt = `${productUpdatedAt.day}/${productUpdatedAt.month}/${productUpdatedAt.year} às ${productUpdatedAt.hour}h${productUpdatedAt.minutes}`
+
+      return product
+
+    })
 
     return res.render('user/ads', { products })
   }

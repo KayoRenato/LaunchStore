@@ -1,0 +1,26 @@
+{% macro render() %}
+  <section class="cart-empty container">
+
+      <div class="circ">
+        <div class="load-lottie"></div>
+        <a href="/products/search"><i class="fas fa-cart-plus fa-4x"></i></a>
+      </div>
+
+      <div class="cart-content">
+        {{ caller() }}
+      </div>
+
+      <script src="/lottie/lottie.min.js"></script>
+
+      <script>
+        lottie.loadAnimation({
+          container: document.querySelector('.load-lottie'), // the dom element that will contain the animation
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          path: '/lottie/1140-yelloader.json' // the path to the animation json
+        }).setSpeed(.8) 
+      </script>
+  
+  </section>
+{% endmacro %}

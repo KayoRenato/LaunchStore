@@ -15,7 +15,8 @@
           <div class="info">
             <div class="title">{{ product.name }}</div>
             <div class="price">{{ product.formattedPrice }}</div>
-            <div class="published">Publicado em {{ product.formattedCreatedAt }}</div>
+            <div class="created">Criado em {{ product.formattedCreatedAt }}</div>
+            <div class="updated">Atualizado em {{ product.formattedUpdatedAt }}</div>
           
             <div class="action">
               <a href="/products/{{product.id}}" >Ver</a>

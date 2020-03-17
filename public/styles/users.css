@@ -4,7 +4,7 @@
 }
 
 .users-ads {
-  max-width: 800px;
+  max-width: 900px;
 }
 
 .users-ads .items{
@@ -52,7 +52,7 @@
 }
 
 .users-ads .info .title{
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   color: rgb(74, 74, 74);
 
@@ -66,7 +66,8 @@
 
   margin-bottom:  4px;
 }
-.users-ads .info .published{
+.users-ads .info .created,
+.users-ads .info .updated{
   /* font-size: 12px; */
   font-weight: normal;
   color: rgb(74, 74, 74);

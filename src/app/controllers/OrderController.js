@@ -38,10 +38,10 @@ module.exports = {
           order.product = await LoadProductService.load('product', { WHERE: { id: order.product_id } })
 
           // detalhes do comprador
-          order.buyer = await User.findOne({ WHERE: {id: buyer_id} })
+          order.buyer = await User.findOne({ WHERE: {id: order.buyer_id} })
 
           // detalhes do vendedor
-          order.seller = await User.findOne({ WHERE: {id: seller_id} })
+          order.seller = await User.findOne({ WHERE: {id: order.seller_id} })
 
           // formatação de preço 
           order.formattedPrice = formatPrice(order.price)
@@ -58,7 +58,7 @@ module.exports = {
 
           // atualizado em ...
           const updatedAt = date(order.updated_at)
-          order.formattedUpdatedAt = `${order.formattedStatus} em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}`
+          order.formattedUpdatedAt = `Atualizado em ${updatedAt.day}/${updatedAt.month}/${updatedAt.year} às ${updatedAt.hour}h${updatedAt.minutes}`
 
           return order
         })

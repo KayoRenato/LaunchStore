@@ -1,31 +1,15 @@
 {% extends "layout.njk" %}
 
 {% import "parts/card.njk" as card %}
+{% import "parts/cart-empyt.njk" as cartEmpyt %}
 
 {% block content %}
 
   {% if (cart.items) and (cart.items.length < 1) %}
-    
-    {% call card.render('Carrinho', 'cart-empty container' ) %}
-      <div class="circ">
-        <div class="load-lottie"></div>
-        <a href="/products/search"><i class="fas fa-cart-plus fa-4x"></i></a>
-      </div>
-      <h2>Seu carrinho está vazio, vamos adicionar um item?</h2>
 
-      <script src="/lottie/lottie.min.js"></script>
-
-      <script>
-        lottie.loadAnimation({
-          container: document.querySelector('.load-lottie'), // the dom element that will contain the animation
-          renderer: 'svg',
-          loop: true,
-          autoplay: true,
-          path: '/lottie/1140-yelloader.json' // the path to the animation json
-        }).setSpeed(.8) 
-      </script>
+    {% call cartEmpyt.render() %}
+      <h2> Seu carrinho está vazio, vamos adicionar um item? </h2>
     {% endcall %}
-
 
   {% else %}
 
