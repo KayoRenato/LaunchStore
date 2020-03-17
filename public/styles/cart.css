@@ -185,3 +185,40 @@
   position: absolute;
   height: 200px;
 }
+
+/* --- MENU --- */
+
+.cart .cart-status-info{
+  border-radius: 25%;
+  background: ;
+}
+
+li.cart a{
+  position: relative;
+}
+
+li.cart a span{
+  position: absolute;
+  top: -8px;
+  right: 8px;
+  
+  background: var(--color-first);
+  border-radius: 50%;
+  
+  width: 22px;
+  height: 22px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 12px;
+  font-weight: bold;
+  
+  transition: 300ms ;
+}
+
+li.cart a:hover span{
+  background: red;
+  color: white;
+}

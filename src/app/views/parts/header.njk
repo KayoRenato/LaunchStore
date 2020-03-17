@@ -58,6 +58,15 @@
           {% endif %}
 
         </li>
+        {% if session.cart.total.quantity > 0 %}
+          <li class="cart">
+          <a href="/cart"><i class="fas fa-shopping-cart"></i>
+          <span id="cart-status-info">{{session.cart.total.quantity}}</span>
+          Seu Carrinho
+          </a>
+        </li>
+        {% endif %}
+        
       </ul>
     </nav>
 

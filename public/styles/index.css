@@ -140,7 +140,7 @@ nav.primary ul{
   /* fazer os elementos da lista ficarem na mesma linha */
   display: flex;
   /* aplicar espaço dinamico entre os elementos */
-  justify-content: space-between;
+  justify-content: space-around;
   margin: 0 32px;
 
 }
@@ -262,4 +262,10 @@ nav.primary i{
 .search-products .categories ul{
   margin-top: 8px;
 
+}
+
+
+.prymary .cart-status-info{
+  border-radius: 25%;
+  background: red;
 }
