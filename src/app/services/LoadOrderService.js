@@ -22,7 +22,7 @@ async function format(order){
   const statuses = {
     open: 'Aberto',
     sold: 'Vendido',
-    canceled: 'Candelado'
+    canceled: 'Cancelado'
   }
 
   order.formattedStatus = statuses[order.status]

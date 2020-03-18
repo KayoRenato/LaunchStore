@@ -1,8 +1,17 @@
 {% extends "layout.njk" %}
 {% import "parts/card.njk" as cards %}
+{% import "parts/cart-empyt.njk" as cartEmpyt %}
 
 {% block content %}
-  
+
+{% if products.length < 1 %}
+
+  {% call cartEmpyt.render('ads') %}
+    <h2>Vamos adicionar um anúncio? </h2>
+  {% endcall %}
+
+{% else %}
+
   {% call cards.render('Meus Anúncios', 'users-ads container')%}
     <div class="items">
       {% for product in products %}
@@ -28,6 +37,8 @@
       {% endfor %}
     </div>
   {% endcall %}
+  
+{% endif %}
 
 
 {% endblock content %}

@@ -195,6 +195,10 @@
   height: 200px;
 }
 
+.circ h2{
+  /* margin-bottom: 50px; */
+}
+
 /* --- MENU --- */
 
 .cart .cart-status-info{

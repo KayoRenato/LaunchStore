@@ -7,8 +7,8 @@
 
   {% if (cart.items) and (cart.items.length < 1) %}
 
-    {% call cartEmpyt.render() %}
-      <h2> Seu carrinho está vazio, vamos adicionar um item? </h2>
+    {% call cartEmpyt.render('search') %}
+      <h2> Vamos adicionar um item? </h2>
     {% endcall %}
 
   {% else %}

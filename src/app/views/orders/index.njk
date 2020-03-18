@@ -7,8 +7,8 @@
 {% block content %}
 
   {% if (orders.length < 1) %}
-    {% call cartEmpyt.render('') %}
-      <h2> Nenhum perdido realido. Compre agora! </h2>
+    {% call cartEmpyt.render('search') %}
+      <h2> Compre agora, adicione um item no carrinho! </h2>
     {% endcall %}
   {% else %}
 

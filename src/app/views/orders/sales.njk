@@ -7,10 +7,8 @@
 {% block content %}
 
   {% if (sales.length < 1) %}
-    {% call cartEmpyt.render('') %}
-      <h2> Nenhum venda realida. </h2>
-      <br/>
-      <h2>Vamos adicionar um produto? </h2>
+    {% call cartEmpyt.render('create') %}
+      <h2>Vamos adicionar um anúncio? </h2>
     {% endcall %}
   {% else %}
 
