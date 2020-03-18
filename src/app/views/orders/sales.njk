@@ -1,13 +1,13 @@
 {% extends "layout.njk" %}
 
 {% import "parts/card.njk" as card %}
-{% import "parts/cart-empyt.njk" as cartEmpyt %}
+{% import "parts/cart-empty.njk" as cartEmpty %}
 
 
 {% block content %}
 
   {% if (sales.length < 1) %}
-    {% call cartEmpyt.render('create') %}
+    {% call cartEmpty.render('create') %}
       <h2>Vamos adicionar um anúncio? </h2>
     {% endcall %}
   {% else %}
