@@ -9,5 +9,6 @@ const OrdersController = require("../app/controllers/OrderController")
 routes.get('/', DouUser, OrdersController.index)
 routes.post('/', DouUser, OrdersController.buy)
 routes.get('/sales', DouUser, OrdersController.sales)
+routes.get('/:id', DouUser, OrdersController.show)
 
 module.exports = routes

@@ -1,13 +1,13 @@
 {% extends "layout.njk" %}
 
 {% import "parts/card.njk" as card %}
-{% import "parts/cart-empyt.njk" as cartEmpyt %}
+{% import "parts/cart-empty.njk" as cartEmpty %}
 
 
 {% block content %}
 
   {% if (orders.length < 1) %}
-    {% call cartEmpyt.render('search') %}
+    {% call cartEmpty.render('search') %}
       <h2> Compre agora, adicione um item no carrinho! </h2>
     {% endcall %}
   {% else %}

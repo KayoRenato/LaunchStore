@@ -111,5 +111,15 @@ module.exports = {
       console.error(err);
       
     }
+  },
+  async show(req,res){
+    try {
+      const order = await LoadOrderService.load('order', {WHERE: {id: req.params.id }, AND: {buyer_id: req.session.userID}})
+  
+      return res.render('orders/details.njk', { order })
+      
+    } catch (error) {
+      return res.redirect('/orders')
+    }
   }
 }
