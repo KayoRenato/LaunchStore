@@ -4,14 +4,14 @@
 }
 
 .dropdown-container:hover .dropdown{
-  top: 30px;
+  top: 25px;
   opacity: 1;
   visibility: initial;
 }
 
 ul.dropdown{
   position: absolute;
-  top: 22px;
+  top: 0px;
   z-index: 100;
 
   width: 130px;
