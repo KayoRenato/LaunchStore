@@ -88,6 +88,15 @@
   padding: 8px 8px;
 }
 
+.sales .item-container {
+  display: grid;
+  grid-template-columns: 1fr auto auto 100px 140px;
+  gap: 8px;
+  align-items: center;
+  margin: 20px auto;
+  padding: 8px 8px;
+}
+
 .item-container:hover{
   background-color: rgba(249, 249, 229, .5);
   border-radius: 8px;

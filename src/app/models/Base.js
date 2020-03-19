@@ -14,8 +14,6 @@ function find(filters, table){
     })
   }
 
-  query += ` ORDER BY updated_at DESC`
-
   return db.query(query)
 }
 

@@ -29,6 +29,26 @@
             <div class="quantity">Qtd. {{sale.quantity}} </div>
             <div class="total">{{sale.formattedTotal}}</div>
             <div class="status {{sale.status}}">{{sale.formattedStatus}}</div>
+          
+            <div class="actions dropdown-container">
+              <span> Ações <i class="fas fa-chevron-circle-down"></i></span>
+              <ul class="dropdown">
+                <li><a href="/orders/{{sale.id}}">Ver Pedido</a></li>
+                <li><a href="/products/{{sale.product.id}}/edit">Editar Produto</a></li>
+                {% if sale.status == 'open' %}
+                  <li>
+                    <form action="/orders/{{sale.id}}/close" method="post">
+                      <button class="sold">Vender</button>
+                    </form>
+                  </li>
+                  <li>
+                    <form action="/orders/{{sale.id}}/cancel" method="post">
+                      <button class="cancel">Cancelar</button>
+                    </form>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
           </div>
 
         {% endfor %}
