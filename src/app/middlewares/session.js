@@ -16,18 +16,27 @@ function DouLogged(req, res, next){
 }
 
 async function DouOwner(req, res, next){
-  const product = await Product.findOne({ WHERE: { user_id: req.session.userID }, AND: { id: req.params.id }})
-  if(!product) 
-    return res.redirect('/users/ads')
+  try {
+    const product = await Product.findOne({ WHERE: { user_id: req.session.userID }, AND: { id: req.params.id }})
+    if(!product) 
+      return res.redirect('/users/ads')
+  
+    next()
 
-  next()
+  } catch (err) {
+    console.log(err)
+    console.log(product)
+
+    return res.redirect('/users/ads')
+    
+  }
 
 }
 
-async function DouSeller(req, res, next){
-  const order = await Order.findOne({ WHERE: { seller_id: req.session.userID }, AND: { id: req.params.id }})
+async function DouStakeholder(req, res, next){
+  const order = await Order.findOneOrder(req.params.id, req.session.userID)
   if(!order) 
-    return res.redirect('/orders/sales')
+    return res.redirect('/users') //colocar pagina não encontrada 404
 
   next()
 
@@ -39,6 +48,6 @@ module.exports = {
   DouUser,
   DouLogged,
   DouOwner,
-  DouSeller
+  DouStakeholder
   
 }

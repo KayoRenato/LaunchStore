@@ -70,7 +70,7 @@
 /* -- SEUS PEDIDOS -- */
 
 .card.orders.container,
-.card.sales.container{
+.card.container{
   width: 900px;
 }
 
@@ -80,15 +80,6 @@
 }
 
 .item-container {
-  display: grid;
-  grid-template-columns: 1fr auto auto 100px;
-  gap: 8px;
-  align-items: center;
-  margin: 20px auto;
-  padding: 8px 8px;
-}
-
-.sales .item-container {
   display: grid;
   grid-template-columns: 1fr auto auto 100px 140px;
   gap: 8px;

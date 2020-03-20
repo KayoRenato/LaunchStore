@@ -42,7 +42,6 @@ module.exports = {
   async buy(req,res){
     try {
       // Pegar produtos do carrinho
-
       const cart = Cart.init(req.session.cart)
       const buyer_id = req.session.userID
       const filteredItems = cart.items.filter(item => 
@@ -120,6 +119,34 @@ module.exports = {
       
     } catch (error) {
       return res.redirect('/orders')
+    }
+  },
+  async update(req,res){
+    try {
+      const { id , action } = req.params
+
+      const acceptedActions = ['close', 'cancel']
+
+      if(!acceptedActions.includes(action)) return res.redirect('/orders/sales')
+
+      let order = await Order.findOne({ WHERE: { id }})
+
+      if(!order || order.status != 'open') return res.redirect('/orders/sales')
+
+      const statuses = {
+        close: "sold",
+        cancel: "canceled"
+      }
+
+      order.status = statuses[action]
+
+      await Order.saveUpdate(id, { status: order.status })
+
+      return res.redirect(`/orders/sales`)
+
+    } catch (err) {
+      console.error(err);
+      
     }
   }
 }
