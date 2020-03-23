@@ -9,11 +9,12 @@ let usersIDs = [], productsIDs = []
 const totalUsers = 5
 const totalProducts = 15
 const totalFiles = 40
+const pass = '123'
 
 async function createUsers() {
   try {
     let users = []
-    const password = await hash('123', 8)
+    const password = await hash(`${pass}`, 8)
 
     while (users.length < totalUsers) {
       users.push({
