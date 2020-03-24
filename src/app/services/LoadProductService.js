@@ -7,7 +7,7 @@ async function getImages(ProductID){
   let files = await Product.files(ProductID)
   files = files.map( file => ({
     id: file.id,
-    name: file.filename,
+    name: file.name,
     path: file.path,
     src: `${file.path.replace("public","")}`
   }))
@@ -48,7 +48,7 @@ const LoadService = {
   },
   async products(){
     try {
-      const products = await Product.all(this.filter) //.findAll() - usado por Mayk
+      let products = await Product.all(this.filter) //.findAll() - usado por Mayk
       const productsPromise = products.map(format) // products.map( product => format(product) )  - É a mesma coisa            
       
       return Promise.all(productsPromise)
