@@ -103,11 +103,20 @@ node seed.js
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-__Frontend field validation__
-![validation-fields-front-end][validation-fields]
-
 __User Creation__
-![register-user][register-user]
+![user-creation][user-creation]
+
+__Product Creation__
+![product-creation][product-creation]
+
+__Order Creation__
+![order-creation][order-creation]
+
+__Password Recovery__
+![password-recovery][password-recovery]
+
+__Sale Completion__
+![sale-completion][sale-completion]
 
 __User validation and email registered on the backend__
 [![Image from Gyazo][user-email-registered-gif]][user-email-registered-url]
@@ -156,15 +165,13 @@ Project Link: [https://github.com/KayoRenato/LaunchStore](https://github.com/Kay
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/kayo-renato/
 
+
+<!-- USAGE EXAMPLES GIF & IMAGES -->
 [home]: assets/img/home.png
-
-[validation-fields]: assets/img/validation-fields.png
-
-[register-user]: assets/img/register-user.png
-
-[user-email-registered-gif]:https://i.gyazo.com/734f4ca91147d8251b4dbf6d0381e205.gif
-[user-email-registered-url]:https://gyazo.com/734f4ca91147d8251b4dbf6d0381e205
-
-
+[user-creation]: assets/img/user.gif
+[product-creation]: assets/img/product.gif
+[order-creation]: assets/img/order.gif
+[password-recovery]:assets/img/password.gif
+[sale-completion]: assets/img/sale.gif
 
 
