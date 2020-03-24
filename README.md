@@ -34,7 +34,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![home][home]]
+![home][home]
 
 This software aims to make the intermediary between the stakeholders of a business. Users will be able to register multiple products in their account and await notification of interest from someone else. After the alert, such as automatic contact exchange, they can finalize the deal.
 
@@ -104,10 +104,10 @@ node seed.js
 ## Usage
 
 __Frontend field validation__
-[![validation-fields-front-end][validation-fields]]
+![validation-fields-front-end][validation-fields]
 
 __User Creation__
-[![register-user][register-user]]
+![register-user][register-user]
 
 __User validation and email registered on the backend__
 [![Image from Gyazo][user-email-registered-gif]][user-email-registered-url]
