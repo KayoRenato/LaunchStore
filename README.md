@@ -105,23 +105,44 @@ node seed.js
 
 __User Creation__
 
+<p align="center">
+
 ![user-creation][user-creation]
+
+</p>
 
 __Product Creation__
 
+<p align="center">
+
 ![product-creation][product-creation]
+
+</p>
+
 
 __Order Creation__
 
+<p align="center">
+  
 ![order-creation][order-creation]
+
+</p>
 
 __Password Recovery__
 
+<p align="center">
+  
 ![password-recovery][password-recovery]
+
+</p>
 
 __Sale Completion__
 
+<p align="center">
+  
 ![sale-completion][sale-completion]
+
+</p>
 
 <!-- ROADMAP -->
 ## Roadmap
