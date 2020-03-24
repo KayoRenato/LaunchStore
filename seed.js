@@ -8,7 +8,7 @@ const File = require("./src/app/models/Files")
 let usersIDs = [], productsIDs = []
 const totalUsers = 5
 const totalProducts = 15
-const totalFiles = 40
+const totalFiles = 50
 const pass = '123'
 
 async function createUsers() {
@@ -65,6 +65,27 @@ async function createProducts() {
         path: `public/images/placeholder.png`,
         product_id: productsIDs[Math.floor(Math.random() * totalProducts)]
       })
+    }
+
+    // check se todos os produtos tem no mínimo 1 e no máximo 6 files
+    for(let i = 1; i < products.length; i++ ){
+      let tot = 0
+      const lim = 5
+      
+      files.forEach(file => {
+        if(file.product_id == i) tot++
+        if(tot > lim){
+          files.splice(files.indexOf(file),1)
+        }
+      })
+
+      if( tot == 0 ){
+        files.push({
+          name: faker.image.image(),
+          path: `public/images/placeholder.png`,
+          product_id: i
+        })
+      } 
     }
 
     const filesPromise = files.map(file => File.saveCreate(file))
