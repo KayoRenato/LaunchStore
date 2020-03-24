@@ -18,7 +18,8 @@
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
-
+<details>
+<summary>Click to expand</summary>
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
 * [Getting Started](#getting-started)
@@ -30,6 +31,7 @@
 * [License](#license)
 * [Contact](#contact)
 
+</details>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
