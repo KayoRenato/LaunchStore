@@ -1,10 +1,13 @@
 nav.primary > ul > li > a{
   height: 60px;
+  margin: 0 8px;
+
 }
 
 .accounts{
   position: relative;
 }
+
 
 .accounts .submenu{
   position: absolute;
