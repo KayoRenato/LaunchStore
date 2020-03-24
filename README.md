@@ -104,6 +104,7 @@ node seed.js
 ## Usage
 
 __User Creation__
+
 ![user-creation][user-creation]
 
 __Product Creation__
