@@ -107,19 +107,20 @@ __User Creation__
 ![user-creation][user-creation]
 
 __Product Creation__
+
 ![product-creation][product-creation]
 
 __Order Creation__
+
 ![order-creation][order-creation]
 
 __Password Recovery__
+
 ![password-recovery][password-recovery]
 
 __Sale Completion__
-![sale-completion][sale-completion]
 
-__User validation and email registered on the backend__
-[![Image from Gyazo][user-email-registered-gif]][user-email-registered-url]
+![sale-completion][sale-completion]
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -167,7 +168,7 @@ Project Link: [https://github.com/KayoRenato/LaunchStore](https://github.com/Kay
 
 
 <!-- USAGE EXAMPLES GIF & IMAGES -->
-[home]: assets/img/home.png
+[home]: assets/img/homepage.png
 [user-creation]: assets/img/user.gif
 [product-creation]: assets/img/product.gif
 [order-creation]: assets/img/order.gif
