@@ -179,7 +179,7 @@ Project Link: [https://github.com/KayoRenato/LaunchStore](https://github.com/Kay
 
 <!-- MARKDOWN LINKS & IMAGES -->
 [forks-shield]: https://img.shields.io/github/forks/KayoRenato/LaunchStore?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[forks-url]: https://github.com/KayoRenato/LaunchStore/network/members
 
 [stars-shield]: https://img.shields.io/github/stars/KayoRenato/LaunchStore?style=for-the-badge
 [stars-url]: https://github.com/KayoRenato/LaunchStore/stargazers
