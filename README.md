@@ -108,7 +108,7 @@ node seed.js
 
 __User Creation__
 
-<a href="#" align="center">
+<a href="[user-creation]" align="center">
   
 ![user-creation][user-creation]
 
@@ -116,7 +116,7 @@ __User Creation__
 
 __Product Creation__
 
-<a href="#" align="center">
+<a href="[product-creation]" align="center">
   
 ![product-creation][product-creation]
 
@@ -124,7 +124,7 @@ __Product Creation__
 
 __Order Creation__
 
-<a href="#" align="center">
+<a href="[order-creation]" align="center">
   
 ![order-creation][order-creation]
 
@@ -132,7 +132,7 @@ __Order Creation__
 
 __Password Recovery__
 
-<a href="#" align="center">
+<a href="[password-recovery]" align="center">
 
 ![password-recovery][password-recovery]
 
@@ -140,7 +140,7 @@ __Password Recovery__
 
 __Sale Completion__
 
-<a href="#" align="center">
+<a href="[sale-completion]" align="center">
 
 ![sale-completion][sale-completion]
 
